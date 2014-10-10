@@ -1,18 +1,10 @@
-class Book < ActiveRecord::Base
-end
-
-class Child < ActiveRecord::Base
-  self.has_many(:borrowedbooks)
-end
-
-class Borrowedbook < ActiveRecord::Base
-  self.has_one(:book)
-end
-
+require 'active_record'
 
 
 class User < ActiveRecord::Base
-  self.has_one(:fav_character)
+  has_one(:fav_character)
+  has_many(:users_comics)
+  has_many(:users_badges)
 end
 
 class Character < ActiveRecord::Base
@@ -39,3 +31,5 @@ end
 
 class Users_badge < ActiveRecord::Base
 end
+
+

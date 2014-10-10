@@ -1,5 +1,9 @@
 require 'sinatra'
+require 'sinatra/reloader'
 require 'pry'
+require 'httparty'
+require 'json'
+require 'uri'
 require_relative './db/connection'
 require_relative './lib/model'
 
@@ -11,7 +15,6 @@ end
 before do 
 	content_type :json
 end
-
 
 get('/users') do
 	User.all.to_json
@@ -27,9 +30,8 @@ post ('/users') do
 end
 
 put ('/users/:id') do 
-	user = User.find(params[:id])
+	user = User.find_by(id: params[:id])
 	user.update(user_params(params))
-
 	user.to_json
 end
 
@@ -40,7 +42,44 @@ delete ('/users/:id') do
 	user.to_json
 end
 
-get('/characters') do
+get ('/users/:id/fav_characters') do
+	user = User.find(params[:id].to_json)
+#API CALL
+end
+
+post ('/users/:id/fav_characters') do
+	Fav_character.create(fav_character_params(params))
+	fav_character.to_json
+end
+
+get ('/users/:id/fav_characters/:id2') do 
+	user = User.find(params[:id].to_json)
+	fav_character = Fav_character.find(params[:id2]).to_json
+end
+
+delete ('/users/:id/fav_characters/:id2') do
+	user = User.find(params[:id].to_json)
+	fav_character = Fav_character.find(params[:id2])
+	fav_character.destory
+	fav_character.to_json
+end
+
+get ('/users/:id/badges') do
+	user = User.find(params[:id].to_json)
+	#API CALL
+end 
+
+get ('/users/:id/comics') do
+	user = User.find(params[:id].to_json)
+	#API CALL
+end
+
+get ('/users/:id/read') do
+	user = User.find(params[:id].to_json)
+	#API CALL
+end
+
+get ('/characters') do
 	Character.all.to_json
 end
 
@@ -51,38 +90,46 @@ end
 post('/characters') do
 	Character.create(character_params(params))
 	characters.to_json
+
+	#API CALL
 end
 
-get('/users/:id/fav_characters') do
-	user = User.find(params[:id].to_json)
-	Fav_character.all.to_json
+get ('/characters/:api_id/comics') do
+	character = Character.find(params[:api_id].to_json)
+
+# API CALL
 end
 
-get('/users/:id/fav_characters/:id') do 
-	Fav_character.find(params[:id]).to_json
+get ('/comics') do
+	Comic.all.to_json
 end
 
-post('/users/:id/fav_characters') do
-	Fav_character.create(fav_character_params(params))
-	fav_character.to_json
+get ('/comics/:id') do
+	comic = Comic.find(params[:id].to_json)
 end
 
-delete('/users/:id/fav_characters/:id') do
-	fav_character = Fav_character.find(params[:id])
-	fav_character.destory
-
-	fav_character.to_json
+post ('/comics') do
+	Comic.create(comic_params(params))
 end
 
-get ('/characters_comics') do
-	character_comics = Character_comic.all.to_json
+get ('/badges') do
+	Badges.all.to_json
 end
 
-get('/characters_comics/:id') do
-	Character_comic.find(params[:id].to_json)
+get ('/badges/:id') do
+	badge = Badge.find(params[:id])
 end
 
-post('/characters_comics') do
-	Character_comic.create(character_comic_params(params))
-	character_comics.to_json
+def user_params(params)
+  params.slice(*User.column_names)
 end
+
+def character_params(params)
+  params.slice(*Character.column_names)
+end
+
+def fav_character_params(params)
+  params.slice(*Fav_character.column_names)
+end
+
+

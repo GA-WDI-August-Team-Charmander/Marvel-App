@@ -34,7 +34,7 @@ var Badge_Model = Backbone.Model.extend({
 });
 
 var FavCharacter_Model = Backbone.Model.extend({
-	url: '/users/' + id + "/fav_characters",
+	url: '/users',
 
 	initialize: function(){
 		console.log("New Fav_character initialised!");
@@ -75,7 +75,7 @@ var User_Collection  = Backbone.Collection.extend({
 	model: User_Model,
 	url: '/users'
 });
-var users = new UserCollection
+var users = new User_Collection()
 
 var Comic_Collection = Backbone.Collection.extend({
 	model: Comic_Model,
@@ -97,11 +97,13 @@ var Badge_Collection = Backbone.Collection.extend({
 
 var FavCharacter_Collection = Backbone.Collection.extend({
 	model: FavCharacter_Model,
-	url: function(){
-		return 
-	}
+	url: '/users'
 });
 var favCharacter_collection = new FavCharacter_Collection();
+favCharacter_collection.fetch()
+favCharacter_collection.models
+
+
 //favChars
 
 var UsersBadge_Collection = Backbone.Collection.extend({
@@ -117,7 +119,7 @@ var UsersBadge_Collection = Backbone.Collection.extend({
 
 var Task_Collection = Backbone.Collection.extend({
 	model: UsersComic_Model,
-	url: '/users/' + user_id + "/com"
+	url: '/users'
 });
 //toReadComics, ReadComics, toBuyComics, boughtComics
 
@@ -133,15 +135,13 @@ var favChars;
 
 
 
-//~<*{{ VIEW }}*>~ --------------------------------
+//~<*{{ VIEWS }}*>~ --------------------------------
 
 
-var Task_View = Backbone.View.extend({
+var Fav_View = Backbone.View.extend({
 	tagName: "li",
 
 });
-
-
 
 var List_View = Backbone.View.extend({
 	initialize: function(){
@@ -149,10 +149,10 @@ var List_View = Backbone.View.extend({
 		this.collection.fetch();
 	},
 
-	addOne: function(task_view){
-		var task_view = new Task_View({model: task_view});
-		task_view.render();
-		this.$el.append(task_view);
+	addOne: function(fav_view){
+		var fav_view = new Fav_View({model: fav_view});
+		fav_view.render();
+		this.$el.append(fav_view);
 	}
 });
 

@@ -140,11 +140,25 @@ var favChars;
 var Task_View = Backbone.View.extend({
 	tagName: "li",
 
+	initialize: function(){
+		this.listenTo(this.model, "remove", this.remove)
+	},
+	render: function(){
+
+	},
+
+	attributes: {},
+
+	events: {}
+
+
 });
 
 
 
 var List_View = Backbone.View.extend({
+	tagName: "ul",
+	
 	initialize: function(){
 		this.listenTo(this.collection, 'add', this.addOne);
 		this.collection.fetch();

@@ -8,6 +8,7 @@ name varchar(255)
 
 CREATE TABLE characters (
 id serial primary key,
+api_id integer
 name varchar(255),
 image_url text,
 description text
@@ -15,10 +16,11 @@ description text
 
 CREATE TABLE comics (
 id serial primary key,
+api_id integer,
 title varchar(255),
 issue_number integer,
 description text,
-isbn varchar(55),
+date_issued varchar(55),
 page_count integer,
 series text,
 thumbnail text
@@ -35,11 +37,11 @@ user_id integer,
 character_id integer
 );
 
-CREATE TABLE characters_comics (
-id serial primary key,
-character_id integer,
-comic_id integer
-);
+-- CREATE TABLE characters_comics (
+-- id serial primary key,
+-- character_id integer,
+-- comic_id integer
+-- );
 
 CREATE TABLE users_comics (
 id serial primary key,

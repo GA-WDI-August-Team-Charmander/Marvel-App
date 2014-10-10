@@ -2,7 +2,7 @@ require 'active_record'
 
 
 class User < ActiveRecord::Base
-  has_one(:fav_character)
+  has_many(:fav_character)
   has_many(:users_comics)
   has_many(:users_badges)
 end

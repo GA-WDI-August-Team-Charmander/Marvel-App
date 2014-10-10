@@ -1,5 +1,5 @@
 Marvel-App
 
 
-It's Marvel App, Yay.
+It's Marvel App.
 

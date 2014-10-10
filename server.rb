@@ -86,4 +86,3 @@ post('/characters_comics') do
 	Character_comic.create(character_comic_params(params))
 	character_comics.to_json
 end
-

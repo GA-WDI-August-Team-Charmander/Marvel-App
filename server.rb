@@ -5,7 +5,7 @@ require 'json'
 require 'uri'
 require 'httparty'
 require_relative './db/connection'
-require_relative './lib/model'
+require_relative './lib/models'
 
 
 after do
@@ -84,7 +84,8 @@ get ('/characters') do
 end
 
 get ('/characters/:id') do
-	Character.find(params[:id].to_json)
+	character = Character.find_by(id: params["id"])
+	character.to_json
 end
 
 post('/characters') do

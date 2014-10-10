@@ -53,7 +53,6 @@ def get_character_comics(hero_name)
 	comics = request["data"]["results"]
 
 	comics.each do |comic|
-		binding.pry
 		api_id = comic["id"]
 		title = comic["title"]
 		issue_number = comic["issueNumber"]

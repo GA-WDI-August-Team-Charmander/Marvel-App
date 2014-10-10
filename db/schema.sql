@@ -8,7 +8,7 @@ name varchar(255)
 
 CREATE TABLE characters (
 id serial primary key,
-api_id integer
+api_id integer,
 name varchar(255),
 image_url text,
 description text

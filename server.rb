@@ -1,7 +1,12 @@
 require 'sinatra'
 require 'sinatra/reloader'
+<<<<<<< HEAD
+=======
 require 'httparty'
+>>>>>>> 4fb73aecfc832d2ea6d3a947ff20aa341995aad2
 require 'pry'
+require 'httparty'
+
 require_relative './db/connection'
 require_relative './lib/model'
 

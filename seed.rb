@@ -17,7 +17,7 @@ def create_hero(hero_name)
 	request = HTTParty.get("http://gateway.marvel.com/v1/public/characters?name=#{name_encoded}&ts=#{timestamp}&apikey=#{apikey}&hash=#{digest}")
 
 	name = request["data"]["results"][0]["name"]
-	image_url = request["data"]["results"][0]["thumbnail"]["path"] + request["data"]["results"][0]["thumbnail"]["extension"]
+	image_url = request["data"]["results"][0]["thumbnail"]["path"] + "." + request["data"]["results"][0]["thumbnail"]["extension"]
 	description = request["data"]["results"][0]["description"]
 	api_id = request["data"]["results"][0]["id"]
 
@@ -60,7 +60,7 @@ def get_character_comics(hero_name)
 		date_issued = comic["dates"][0]["date"].split("T")[0]
 		page_count = comic["pageCount"]
 		series = comic["series"]["name"]
-		thumbnail = comic["thumbnail"]["path"] + comic["thumbnail"]["extension"]
+		thumbnail = comic["thumbnail"]["path"] + "." + comic["thumbnail"]["extension"]
 
 		Comic.create({
 			api_id: api_id, 

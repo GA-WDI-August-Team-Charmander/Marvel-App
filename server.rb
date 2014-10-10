@@ -1,5 +1,8 @@
 require 'sinatra'
+require 'sinatra/reloader'
 require 'pry'
+require 'httparty'
+
 require_relative './db/connection'
 require_relative './lib/model'
 

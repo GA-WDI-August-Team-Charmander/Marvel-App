@@ -45,8 +45,8 @@ CREATE TABLE users_comics (
 id serial primary key,
 comic_id integer,
 user_id integer,
-read varchar(255),
-bought boolean
+read varchar(255), 
+bought boolean 
 );
 
 CREATE TABLE users_badges (

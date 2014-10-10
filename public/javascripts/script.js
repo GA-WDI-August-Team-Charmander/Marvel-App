@@ -132,3 +132,53 @@ var badges;
 var favChars;
 
 
+
+
+//~<*{{ VIEW }}*>~ --------------------------------
+
+
+var Task_View = Backbone.View.extend({
+	tagName: "li",
+
+});
+
+
+
+var List_View = Backbone.View.extend({
+	initialize: function(){
+		this.listenTo(this.collection, 'add', this.addOne);
+		this.collection.fetch();
+	},
+
+	addOne: function(task_view){
+		var task_view = new Task_View({model: task_view});
+		task_view.render();
+		this.$el.append(task_view);
+	}
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

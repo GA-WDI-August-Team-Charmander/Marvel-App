@@ -7,6 +7,10 @@ require_relative './lib/models'
 Character.delete_all
 Comic.delete_all
 
+user = User.create(name: "Frog")
+
+fav1 = FavCharacter.create(user_id: 1, character_id: 139)
+
 def create_hero(hero_name)
 	timestamp = Time.now.strftime("%H%M%S%L")
 	apikey = "8d20b1ff41cbacbd7ac1f5b68ae8f6e5"

@@ -75,13 +75,13 @@ var User_Collection  = Backbone.Collection.extend({
 	model: User_Model,
 	url: '/users'
 });
-var user_collection = new UserCollection
+var users = new UserCollection
 
 var Comic_Collection = Backbone.Collection.extend({
 	model: Comic_Model,
 	url: '/comics'
 });
-
+// comics
 
 var Character_Collection = Backbone.Collection.extend({
 	model: Character_Model,
@@ -97,10 +97,9 @@ var Badge_Collection = Backbone.Collection.extend({
 
 var FavCharacter_Collection = Backbone.Collection.extend({
 	model: FavCharacter_Model,
-	//url:  //?????????????
-	//url: function(){
-	//	return 
-	//}
+	url: function(){
+		return 
+	}
 });
 var favCharacter_collection = new FavCharacter_Collection();
 //favChars

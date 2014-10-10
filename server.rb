@@ -5,7 +5,7 @@ require 'json'
 require 'uri'
 require 'httparty'
 require_relative './db/connection'
-require_relative './lib/model'
+require_relative './lib/models'
 
 
 after do
@@ -21,7 +21,7 @@ get('/users') do
 end
 
 get('/users/:id') do
-	User.find(params[:id].to_json)
+	User.find(params[:id])
 end
 
 post ('/users') do
@@ -43,7 +43,8 @@ delete ('/users/:id') do
 end
 
 get ('/users/:id/fav_characters') do
-	user = User.find(params[:id].to_json)
+	user = User.find(params[:id])
+	binding.pry
 #API CALL
 end
 

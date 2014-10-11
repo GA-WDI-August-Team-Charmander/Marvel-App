@@ -20,8 +20,11 @@ var user_list_view = new List_View( {collection: User_Collection} );
 
 
 
+
 var Item_View = Backbone.View.extend({
 	tagName: "li",
+
+
 
 	initialize: function(){
 		this.listenTo(this.model, "remove", this.remove);
@@ -57,9 +60,7 @@ generatePage();
 
 
 
-
-
-
+//badge
 
 
 
@@ -76,8 +77,12 @@ generatePage();
 // 		console.log("New comic initialised!");
 // 	},
 
+
 // 	urlRoot: '/comics'
 // });
+
+//toReadComics, ReadComics, toBuyComics, boughtComics
+
 
 // var Badge_Model = Backbone.Model.extend({
 // 	initialize: function(){
@@ -104,6 +109,8 @@ generatePage();
 
 // 	urlRoot: '/characters_comics'
 // });
+
+//~<*{{ VIEWS }}*>~ --------------------------------
 
 // var UsersComic_Model = Backbone.Model.extend({
 // 	initialize: function(){
@@ -186,14 +193,6 @@ generatePage();
 
 
 //~<*{{ VIEW }}*>~ --------------------------------
-
-
-
-
-
-
-
-
 
 
 

@@ -1,6 +1,8 @@
 CREATE DATABASE marvel_app;
 \c marvel_app;
 
+DROP TABLE fav_characters;
+
 CREATE TABLE users (
 id serial primary key,
 name varchar(255)
@@ -37,11 +39,11 @@ user_id integer,
 character_id integer
 );
 
--- CREATE TABLE characters_comics (
--- id serial primary key,
--- character_id integer,
--- comic_id integer
--- );
+CREATE TABLE characters_comics (
+id serial primary key,
+character_id integer,
+comic_id integer
+);
 
 CREATE TABLE users_comics (
 id serial primary key,

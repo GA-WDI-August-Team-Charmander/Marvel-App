@@ -122,6 +122,8 @@ var List_View = Backbone.View.extend({
 
 	initialize: function(){
 		this.listenTo(this.collection, 'add', this.addOne);
+		this.listenTo(this.collection, 'change', this.render); // is this right?
+		// when colleciton changes, reRender list_view ?
 		this.collection.fetch();
 	},
 
@@ -129,6 +131,9 @@ var List_View = Backbone.View.extend({
 		var item_view = new Item_view({model: item_view});
 		item_view.render();
 		this.$el.append(item_view);
+	},
+	render: function(){
+		this.collection.forEach(this.addOne, this);
 	}
 });
 

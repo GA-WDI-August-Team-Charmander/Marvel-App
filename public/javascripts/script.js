@@ -195,26 +195,31 @@ generatePage();
 // // });
 
 
-//~<*{{ UsersComics }}*>~ --------------------------------
+// ~<*{{ UsersComics }}*>~ --------------------------------
 
-// var UsersComic_Model = Backbone.Model.extend({
-// 	initialize: function(){
-// 		console.log("New Users_comic initialised!");
-// 	},
+var UsersComic_Model = Backbone.Model.extend({
+	initialize: function(){
+		console.log("New Users_comic initialised!");
+	},
 
-// 	urlRoot: '/users_comics'
-// });
+	urlRoot: '/users_comics'
+});
 
-// var UsersComic_Collection = Backbone.Collection.extend({
-// 	model: UsersComic_Model,
-// 	url: '/users/' + user_id + "/com"
-// });
-// //toReadComics, ReadComics, toBuyComics, boughtComics
+var UsersComic_Collection = Backbone.Collection.extend({
+	model: UsersComic_Model,
+	url: ????
+});
 
-// var toBuyComics;
-// var boughtComics;
-// var toReadComics;
-// var readComics;
+var usersComic_collection = new UsersComic_Collection({})
+
+//toReadComics, ReadComics, toBuyComics, boughtComics
+
+
+
+var toBuyComics = new UsersComic_Collection({});
+var boughtComics;
+var toReadComics;
+var readComics;
 
 
 

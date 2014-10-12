@@ -29,7 +29,7 @@ var User_Collection  = Backbone.Collection.extend({
 
 var user_collection = new User_Collection();
 
-var user_list_view = new List_View( {collection: user_collection} );
+// var user_list_view = new List_View( {collection: user_collection} );
 //this might be used for if there is a select for which user profile we're on or logged in
 
 
@@ -97,7 +97,7 @@ var Badge_Collection = Backbone.Collection.extend({
 });
 
 var badge_collection = new Badge_Collection();
-var badge_list_view = new List_View( {collection: badge_collection} );
+// var badge_list_view = new List_View( {collection: badge_collection} );
 //this badge view is to show all possible badges user can earn.
 // the ones the user has not earned will be 
 
@@ -140,12 +140,12 @@ var List_View = Backbone.View.extend({
 
 
 
-function generatePage(){
-	addUserButton();
-	$('#users').append(user_list_view);
-}
+// function generatePage(){
+// 	addUserButton();
+// 	$('#users').append(user_list_view);
+// }
 
-generatePage();
+// generatePage();
 
 
 
@@ -154,28 +154,70 @@ generatePage();
 //~<*{{ FavCharacters }}*>~ --------------------------------
 
 
-// var FavCharacter_Model = Backbone.Model.extend({
-// 	url: '/users/' + id + "/fav_characters",
+var FavCharacter_Model = Backbone.Model.extend({
+	initialize: function(){
+	},
 
-// 	initialize: function(){
-// 		console.log("New Fav_character initialised!");
-// 	},
+	urlRoot: '/fav_characters'
+});
 
-// 	urlRoot: '/fav_characters'
-// });
-
-// var FavCharacter_Collection = Backbone.Collection.extend({
-// 	model: FavCharacter_Model,
-// 	//url:  //?????????????
-// 	//url: function(){
-// 	//	return 
-// 	//}
-// });
-// var favCharacter_collection = new FavCharacter_Collection();
-// var favChars;
+var FavCharacter_Collection = Backbone.Collection.extend({
+	model: FavCharacter_Model,
+	url: '/fav_characters'
+});
+var favCharacter_collection = new FavCharacter_Collection();
 
 
+var CharacterView = Backbone.View.extend({
+	favCharTemplate: _.template( $('#fav-char-template').html() ),
+	className: 'fav-char-el',
+	events: {
+		"click someElement" : "seeInfo",
+	},
 
+	seeInfo: function() {
+		var modal = new InfoModalView({ model: this.model });
+	},
+
+	render:function(){
+		var thisView = this;
+		var characterId = (this.model.attributes.character_id);
+		console.log(characterId); //**>{{}}>~~
+
+		character_collection.fetch().done(function() {
+
+			var character = character_collection.where({id: characterId})[0].attributes
+			console.log(character) //**>{{}}>~~
+			console.log(thisView)
+
+			console.log(character.image_url)	
+			console.log(thisView.$el.html())
+			thisView.$el.html('<img src="' + character.image_url + '"class="fav-char-image"><div class="character-info"><h4>' + character.name + '</h4></br>' + character.description + '</div>')
+			// thisView.$el.html(thisView.favCharTemplate({ character: character }));
+		})
+		
+	}
+});
+
+var FavCharacterListView = Backbone.View.extend({
+
+	initialize: function(option){
+		this.userId = option.userId
+		this.listenTo(this.collection, 'add', this.addOne);
+		this.collection.fetch();
+	},
+
+	addOne:function(item){
+		if (item.attributes.user_id == this.userId) {
+		   var favCharacter = new CharacterView({ model: item })
+		   favCharacter.render();
+		   this.$el.append(favCharacter.el)
+		}
+	}
+});
+
+
+var favCharacters = new FavCharacterListView({ collection: favCharacter_collection, el: $('#results'), userId: 4})
 
 
 

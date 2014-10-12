@@ -1,0 +1,14 @@
+header {
+	height: 25%;
+	background-color: red;
+	padding: 1em;
+}
+
+
+#navbar {
+	text-align: center;
+	margin: 0.5em;
+}
+#navbar button {
+	margin-right: 1em;
+}

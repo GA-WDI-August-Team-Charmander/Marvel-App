@@ -34,8 +34,6 @@ var Badge_Model = Backbone.Model.extend({
 });
 
 var FavCharacter_Model = Backbone.Model.extend({
-	url: '/users',
-
 	initialize: function(){
 		console.log("New Fav_character initialised!");
 	},
@@ -87,6 +85,7 @@ var Character_Collection = Backbone.Collection.extend({
 	model: Character_Model,
 	url: '/characters'
 });
+var characters = new Character_Collection()
 //chars
 
 var Badge_Collection = Backbone.Collection.extend({
@@ -108,7 +107,7 @@ favCharacter_collection.models
 
 var UsersBadge_Collection = Backbone.Collection.extend({
 	model: UsersBadge_Model,
-	//url: '/users/' + id + "/badges"
+	url: '/badges'
 });
 
 // var CharactersComic_Collection  = Backbone.Collection.extend({
@@ -138,23 +137,79 @@ var favChars;
 //~<*{{ VIEWS }}*>~ --------------------------------
 
 
-var Fav_View = Backbone.View.extend({
+var CharacterView = Backbone.View.extend({
 	tagName: "li",
+	// nameTemplate: _.template( $('#theTemplate').html() ),
+	events: {
+		"click someElement" : "seeInfo",
+	},
 
+	seeInfo: function() {
+		var modal = new InfoModalView({ model: this.model });
+	},
+
+	render:function(){
+		this.$el.html(this.nameTemplate({ character: this.model.toJSON() }));
+	}
 });
 
-var List_View = Backbone.View.extend({
+var FavCharacterListView = Backbone.View.extend({
+
 	initialize: function(){
 		this.listenTo(this.collection, 'add', this.addOne);
 		this.collection.fetch();
 	},
 
-	addOne: function(fav_view){
-		var fav_view = new Fav_View({model: fav_view});
-		fav_view.render();
-		this.$el.append(fav_view);
+	addOne:function(item){
+		var character = new CharacterView({ model: item });
+		character.render();
+		this.$el.append(character.el)
 	}
 });
+
+var FavCharacterFormView = Backbone.View.extend({
+	events: {
+		"click someElement" : "createCategory",
+	},
+})
+
+var favCharacters = new FavCharacterListView({ collection: characters, el: $('someList'), userId: 1})
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// var Fav_View = Backbone.View.extend({
+// 	tagName: "li",
+
+// });
+
+// var List_View = Backbone.View.extend({
+// 	initialize: function(){
+// 		this.listenTo(this.collection, 'add', this.addOne);
+// 		this.collection.fetch();
+// 	},
+
+// 	addOne: function(fav_view){
+// 		var fav_view = new Fav_View({model: fav_view});
+// 		fav_view.render();
+// 		this.$el.append(fav_view);
+// 	}
+// });
 
 
 

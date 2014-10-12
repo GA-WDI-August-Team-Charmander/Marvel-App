@@ -11,7 +11,7 @@ header {
 }
 #navbar button {
 	margin-right: 1em;
-}
+
 
 .results_fav_characters_item {
 
@@ -19,4 +19,5 @@ header {
 
 .results_fav_characters_item img {
 	height: 5em;
+
 }

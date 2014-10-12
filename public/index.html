@@ -12,56 +12,60 @@
 	<link rel="stylesheet" href="./stylesheets/styles.css">
 </head>
 
+	<script id="fav-char-template" type="text/template">
+		<img src="<% character.image_url %>" class="fav-char-image">
+		<div class="character-info">
+			<% character.name %>
+			<% character.description %>
+		</div>
+	</script>
+</head>
+
+
+
+
 
 <body>
+
 <div class = "container">
 	<div class= "page-header">
-
-		<img src="" id="user_profile">
-		<h1 id="user_name">Octopu
-			&nbsp;&nbsp<small>Master Octopus Collector</small></h1>
-		<input type="text" id="header_search">
-		<button>Header_search</button>
+	<h1 id="user_name">
+			<img src="https://fbcdn-sphotos-a-a.akamaihd.net/hphotos-ak-xaf1/v/t1.0-9/484341_10200865976830565_1249622264_n.jpg?oh=f89b49f3ff33f8291c6f4845bd9ad3c2&oe=54F5EE6D&__gda__=1421302758_ac30f8988ea1a8b7e9a5548183129eeb" id="user_image" class="circular">&nbsp;&nbsp;OCTOPU
+			<small>Master Octopus Collector</small>
+		</h1>
 	</div>
 
+	<div class="main">
+		<ul class= "nav nav-tabs col-sm-offset-5" role= "tablist">
+			<li class= "tasks"><a href="#">Buy/Read</a></li>
+			<li class="fav-char"><a href="#">Favorite Characters</a></li>
+			<li class="activity"><a href="#">Activity</a></li>
+			<li class= "badges"><a href="#">Badges</a></li>
+			<li class= "groups"><a href="#">Groups</a></li>
+		</ul>
+	</div>
 
-		<div class="main">
-			<ul class= "nav nav-pills col-sm-offset-7 " role= "tablist">
-				<li><a href="#"> Tasks</a></li>
-				<li class="fav-char"><a href="#">Favorite Characters</a></li>
-				<li class="activity"><a href="#">Activity</a></li>
-				<li><a href="#">Badges</a></li>
-				<li><a href="#">Groups</a></li>
-			</ul>
-		</div>
 	
-		<article id="results">
-			<input id="test_input" name="test_input" type="text">
-			<button id="test_button">Test Button</button>
-		<!-- views append here -->
-
-			<section class="results_fav_characters_container">
-				<div class="results_fav_characters_item" id="fav_char_1">
-					<img src="http://www.abc-kid.com/spiderman/circle.GIF" alt="">
-					<h4>Spider Man</h4>
-					<p>	Spider-Pig, Spider-Pig,
-						Does whatever a Spider-Pig does.
-						Can he swing from a web?
-						No, he can't, he's a pig,
-						Look out, he is a Spider-Pig!
-					</p>
-
-				</div>
-				<div class="results_fav_characters_item" id="fav_char_2">
-					<img src="http://piratevinyldecals.com/wps/wp-content/uploads/2014/01/Batman-logo-2-pv173.png" alt="">
-					<h4>Batman</h4>
-					<p>	Na na na na na na na na! Na na na na na na na na!
-					</p>
-				</div>
-			</section>
-			
+		<article id="fav-characters">
+			<ul>
+			</ul>
 		</article>
-		
+
+		<article id="tasks">
+			<section class="to-buy">
+			</section>
+			<section class="bought">
+			</section>
+			<section class= "to-read">
+			</section>
+			<section class= "read">
+		</section>
+		</article>
+
+		<article id="badges">
+			<ul>
+			</ul>
+		</article>
 	</div>
 </div>
 

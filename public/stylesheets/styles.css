@@ -1,15 +1,57 @@
-h1{
-	font-size: 80px;
+
+@import url(http://fonts.googleapis.com/css?family=Fjalla+One);
+@import url(http://fonts.googleapis.com/css?family=Euphoria+Script);
+@import url(http://fonts.googleapis.com/css?family=Ruda);
+@import url(http://fonts.googleapis.com/css?family=Rubik+Mono+One);
+
+
+
+body{
+	background-color: rgba(0,0,0,0.498039)
 }
+
+h1{
+	font-size: 100px;
+	font-family: 'Fjalla One', sans-serif;
+	color: white;
+	letter-spacing: -5px;
+	font-style: bold;
+}
+
 div.page-header{
-	background-color: red;
+	background-color: #B80000;
 	padding-left: 30px;
 	padding-right: 30px;
+	padding-top: 50px;
+	padding-bottom: 50px;
 }
+
 h1 small{
-	font-size: 40px;
+	font-size: 30px;
+	font-style: bold;
+	letter-spacing: 0px;
+	color: white;
+	text-align: right;
+	font-family: 'Fjalla One', sans-serif;
+	padding-left: 350px
 }
 
 ul.nav {
 	text-align: right;
+}
+
+li {
+	font-family: 'Fjalla One', sans-serif;
+}
+
+a {
+	color: black;
+	text-transform: uppercase;
+	font-size: 20px
+}
+
+img.circular{
+	width: 100px;
+	height: 100px;
+	border-radius: 100px;
 }

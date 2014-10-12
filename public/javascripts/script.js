@@ -157,7 +157,6 @@ var List_View = Backbone.View.extend({
 var FavCharacter_Model = Backbone.Model.extend({
 	initialize: function(){
 	},
-
 	urlRoot: '/fav_characters'
 });
 
@@ -192,7 +191,7 @@ var CharacterView = Backbone.View.extend({
 
 			console.log(character.image_url)	
 			console.log(thisView.$el.html())
-			thisView.$el.html('<img src="' + character.image_url + '"class="fav-char-image"><div class="character-info"><h4>' + character.name + '</h4></br>' + character.description + '</div>')
+			thisView.$el.html('<img src="' + character.image_url + '"class="fav-char-image"><li class="character-info"><h4>' + character.name + '</h4></br>' + character.description + '</li>')
 			// thisView.$el.html(thisView.favCharTemplate({ character: character }));
 		})
 		
@@ -219,7 +218,25 @@ var FavCharacterListView = Backbone.View.extend({
 
 var favCharacters = new FavCharacterListView({ collection: favCharacter_collection, el: $('#results'), userId: 4})
 
+var FormView = Backbone.View.extend({
+	events: {
+		"click i#addButton" : "addFavCharacter",
+	},
 
+	addFavCharacter: function() {
+		var searchedName = this.$el.find('input[name="character-name"]').val(); //input value
+		var searchResult = character_collection.findWhere({name: searchedName});
+
+		if (searchResult.length != 0) {
+			this.collection.create({user_id: this.userId, character_id: searchResult.id});
+		} else {
+			character_collection.create({name: searchedName});
+		}
+
+	}
+});
+character_collection.create({name: "Blackheart"});
+var formView = new FormView({ el: $("#fav_characters"), collection: favCharacter_collection, userId: 4 });
 
 //~<*{{ CharactersComics }}*>~ --------------------------------
 

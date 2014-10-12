@@ -17,7 +17,13 @@
 	<script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.1/jquery-ui.min.js"></script>
 	<script src="https://maps.googleapis.com/maps/api/js?v=3.exp"></script>
 
-
+	<script id="fav-char-template" type="text/template">
+		<img src="<% character.image_url %>" class="fav-char-image">
+		<div class="character-info">
+			<% character.name %>
+			<% character.description %>
+		</div>
+	</script>
 </head>
 <body>
 <div class = "container">
@@ -40,11 +46,14 @@
 		</div>
 	
 		<article id="results">
-			<input id="test_input" name="test_input" type="text">
-			<button id="test_button">Test Button</button>
+			
 		<!-- views append here -->
 
-			<section class="results_fav_characters_container">
+			<section class="fav_characters">
+
+				<input id="test_input" name="test_input" type="text">
+				<button id="test_button">Test Button</button>
+
 				<div class="results_fav_characters_item" id="fav_char_1">
 					<img src="http://www.abc-kid.com/spiderman/circle.GIF" alt="">
 					<h4>Spider Man</h4>

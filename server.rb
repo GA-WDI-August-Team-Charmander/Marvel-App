@@ -58,12 +58,12 @@ end
 
 get ('/users/:id/fav_characters/:id2') do 
 	user = User.find(params[:id].to_json)
-	fav_character = Fav_character.find(params[:id2]).to_json
+	fav_character = Fav_character.find(params[:id]).to_json#id2
 end
 
 delete ('/users/:id/fav_characters/:id2') do
 	user = User.find(params[:id].to_json)
-	fav_character = Fav_character.find(params[:id2])
+	fav_character = Fav_character.find(params[:id])#id2
 	fav_character.destory
 	fav_character.to_json
 end

@@ -136,7 +136,7 @@ get ('/users/:id/comics') do
 end
 
 get ('/users/:id/read') do
-	user = User.find(params[:id].to_json)
+	user = User.find_by(id: params["id"].to_json)
 	#API CALL
 end
 
@@ -145,7 +145,8 @@ get ('/characters') do
 end
 
 get ('/characters/:id') do
-	Character.find(params[:id].to_json)
+	character = Character.find_by(id: params["id"])
+	character.to_json
 end
 
 post('/characters') do

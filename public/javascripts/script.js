@@ -186,11 +186,7 @@ var CharacterView = Backbone.View.extend({
 		character_collection.fetch().done(function() {
 
 			var character = character_collection.where({id: characterId})[0].attributes
-			console.log(character) //**>{{}}>~~
-			console.log(thisView)
 
-			console.log(character.image_url)	
-			console.log(thisView.$el.html())
 			thisView.$el.html('<img src="' + character.image_url + '"class="fav-char-image"><li class="character-info"><h4>' + character.name + '</h4></br>' + character.description + '</li>')
 			// thisView.$el.html(thisView.favCharTemplate({ character: character }));
 		})
@@ -235,7 +231,7 @@ var FormView = Backbone.View.extend({
 
 	}
 });
-character_collection.create({name: "Blackheart"});
+
 var formView = new FormView({ el: $("#fav_characters"), collection: favCharacter_collection, userId: 4 });
 
 //~<*{{ CharactersComics }}*>~ --------------------------------

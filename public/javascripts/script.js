@@ -188,10 +188,10 @@ var CharacterView = Backbone.View.extend({
 
 			var character = character_collection.where({id: characterId})[0].attributes
 			console.log(character) //**>{{}}>~~
-			console.log(thisView)
+			console.log(thisView) //**>{{}}>~~
 
-			console.log(character.image_url)	
-			console.log(thisView.$el.html())
+			console.log(character.image_url) //**>{{}}>~~	 
+			console.log(thisView.$el.html()) //**>{{}}>~~
 			thisView.$el.html('<img src="' + character.image_url + '"class="fav-char-image"><div class="character-info"><h4>' + character.name + '</h4></br>' + character.description + '</div>')
 			// thisView.$el.html(thisView.favCharTemplate({ character: character }));
 		})

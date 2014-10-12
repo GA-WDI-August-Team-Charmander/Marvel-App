@@ -3,19 +3,14 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Marvel App</title>
-	<link rel="stylesheet" href="./stylesheets/styles.css">
-
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
-	<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
 
 	<script src='./javascripts/jquery.js'></script>
 	<script src='./javascripts/underscore.js'></script>
 	<script src='./javascripts/backbone.js'></script>
 	<script src="./javascripts/bootstrap.js"></script>
-
-	<link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.1/themes/smoothness/jquery-ui.css" />
-	<script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.1/jquery-ui.min.js"></script>
-	<script src="https://maps.googleapis.com/maps/api/js?v=3.exp"></script>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+	<link rel="stylesheet" href="./stylesheets/styles.css">
+</head>
 
 	<script id="fav-char-template" type="text/template">
 		<img src="<% character.image_url %>" class="fav-char-image">
@@ -25,44 +20,58 @@
 		</div>
 	</script>
 </head>
+
+
+
+
+
 <body>
+
 <div class = "container">
-
-	<header>
-		<img src="" id="user_profile">
-		<h1 id="user_name">Octopu</h1>
-		<h3 id="level">Master Octopus Collector</h2>
-		<input type="text" id="header_search">
-		<button>Header_search</button>
-	</header>
-	
-	<div class="main">
-		<div id="navbar">
-			<button id="navbar_tasks">Tasks</button>
-			<button id="navbar_fav_chars">Fav Chars</button>
-			<button id="navbar_activity">Activty</button>
-			<button id="navbar_badges">Badges</button>
-			<button id="navbar_groups">Groups</button>
-		</div>
-	
-		<article id="results">
-			
-		<!-- views append here -->
-
-			<section class="fav_characters">
-
-				<input id="test_input" name="test_input" type="text">
-				<button id="test_button">Test Button</button>
-
-			</section>
-			
-		</article>
-		
+	<div class= "page-header">
+	<h1 id="user_name">
+			<img src="https://fbcdn-sphotos-a-a.akamaihd.net/hphotos-ak-xaf1/v/t1.0-9/484341_10200865976830565_1249622264_n.jpg?oh=f89b49f3ff33f8291c6f4845bd9ad3c2&oe=54F5EE6D&__gda__=1421302758_ac30f8988ea1a8b7e9a5548183129eeb" id="user_image" class="circular">&nbsp;&nbsp;OCTOPU
+			<small>Master Octopus Collector</small>
+		</h1>
 	</div>
 
+	<div class="main">
+		<ul class= "nav nav-tabs col-sm-offset-5" role= "tablist">
+			<li class= "tasks"><a href="#">Buy/Read</a></li>
+			<li class="fav-char"><a href="#">Favorite Characters</a></li>
+			<li class="activity"><a href="#">Activity</a></li>
+			<li class= "badges"><a href="#">Badges</a></li>
+			<li class= "groups"><a href="#">Groups</a></li>
+		</ul>
+	</div>
 
+	
+		<article id="fav-characters">
+			<input type= "text" name="fav_characters">
+			<button class="add">Add Character to My Favorites</button>
+			<ul>
+			</ul>
+		</article>
+
+		<article id="tasks">
+			<section class="to-buy">
+			</section>
+			<section class="bought">
+			</section>
+			<section class= "to-read">
+			</section>
+			<section class= "read">
+		</section>
+		</article>
+
+		<article id="badges">
+			<ul>
+			</ul>
+		</article>
+	</div>
 </div>
 
+	
 	<script src="./javascripts/script.js"></script>
 
 </body>

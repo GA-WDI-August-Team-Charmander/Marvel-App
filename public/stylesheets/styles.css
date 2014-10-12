@@ -1,0 +1,15 @@
+h1{
+	font-size: 80px;
+}
+div.page-header{
+	background-color: red;
+	padding-left: 30px;
+	padding-right: 30px;
+}
+h1 small{
+	font-size: 40px;
+}
+
+ul.nav {
+	text-align: right;
+}

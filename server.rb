@@ -1,11 +1,10 @@
+require 'rubygems'
+require 'bundler/setup'
+Bundler.require(:default)
 require 'sinatra'
-require 'sinatra/reloader'
-require 'pry'
-require 'json'
-require 'uri'
-require 'httparty'
 require_relative './db/connection'
 require_relative './lib/models'
+require 'active_support'
 
 
 after do
@@ -16,12 +15,12 @@ before do
 	content_type :json
 end
 
-get('/users') do
+get ('/users') do
 	User.all.to_json
 end
 
-get('/users/:id') do
-	User.find(params[:id].to_json)
+get ('/users/:id') do
+	User.find(params[:id])
 end
 
 post ('/users') do
@@ -42,8 +41,13 @@ delete ('/users/:id') do
 	user.to_json
 end
 
+get ('/fav_characters') do
+	FavCharacter.all.to_json
+end
+
 get ('/users/:id/fav_characters') do
-	user = User.find(params[:id].to_json)
+	user = User.find(params[:id])
+	binding.pry
 #API CALL
 end
 

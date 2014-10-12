@@ -1,3 +1,5 @@
+
+
 function addUserButton(){
 	$('#add_user_button').on('click', function(){
 		$.post('/users', { name: $('add_user_input').val() } );
@@ -234,3 +236,24 @@ generatePage();
 // });
 
 // var badges;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

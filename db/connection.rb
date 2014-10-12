@@ -3,7 +3,7 @@ require 'active_record'
 ActiveRecord::Base.establish_connection({
   :adapter => "postgresql",
   :host => "localhost",
-  :username => "IrisMartinez",
+  :username => "joebiggica",
   :database => "marvel_app"
 })
 

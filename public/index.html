@@ -22,39 +22,51 @@
 <body>
 <div class = "container">
 
+	<header>
+		<img src="" id="user_profile">
+		<h1 id="user_name">Octopu</h1>
+		<h3 id="level">Master Octopus Collector</h2>
+		<input type="text" id="header_search">
+		<button>Header_search</button>
+	</header>
 	
-	<div class="users">
-		<input type="text" id="add_user_input">
-		<button id="add_user_btn">add user</button>
-	</div>
-
-
-
-	<div id="left">
-		<img id="user_image" src=""></img>
-		<h2 id="user_name"></h2>
-		<h3 id="user_level"></h3>
-
-		<div id="user_badge_preview"></div>
-
-		<div id="activity_stream"></div>
-	</div>
-
-
-
-
-	<div id="right">
-		<div id="right_navbar">
-			<h3 id="right_navbar_task">Tasks</h3>
-			<h3 id="right_navbar_achievements">Achievements</h3>
-			<h3 id="right_navbar_favs">Favourites</h3>
-			<h3 id="right_navbar_groups">Groups</h3>
+	<div class="main">
+		<div id="navbar">
+			<button id="navbar_tasks">Tasks</button>
+			<button id="navbar_fav_chars">Fav Chars</button>
+			<button id="navbar_activity">Activty</button>
+			<button id="navbar_badges">Badges</button>
+			<button id="navbar_groups">Groups</button>
 		</div>
+	
+		<article id="results">
+			<input id="test_input" name="test_input" type="text">
+			<button id="test_button">Test Button</button>
+		<!-- views append here -->
 
-		<div class="right_append_section"></div>
+			<section class="results_fav_characters_container">
+				<div class="results_fav_characters_item" id="fav_char_1">
+					<img src="http://www.abc-kid.com/spiderman/circle.GIF" alt="">
+					<h4>Spider Man</h4>
+					<p>	Spider-Pig, Spider-Pig,
+						Does whatever a Spider-Pig does.
+						Can he swing from a web?
+						No, he can't, he's a pig,
+						Look out, he is a Spider-Pig!
+					</p>
 
+				</div>
+				<div class="results_fav_characters_item" id="fav_char_2">
+					<img src="http://piratevinyldecals.com/wps/wp-content/uploads/2014/01/Batman-logo-2-pv173.png" alt="">
+					<h4>Batman</h4>
+					<p>	Na na na na na na na na! Na na na na na na na na!
+					</p>
+				</div>
+			</section>
+			
+		</article>
+		
 	</div>
-
 
 
 </div>

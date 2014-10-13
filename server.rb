@@ -123,20 +123,20 @@ post ('/user_badges') do
 	Users_badge.create({user_id: params["user_id"], badge_id: params["badge_id"]})
 end
 
-get ('/users/:id/badges') do
-	user = User.find(params[:id].to_json)
-	#API CALL
-end 
+# get ('/users/:id/badges') do
+# 	user = User.find(params[:id].to_json)
+# 	#API CALL
+# end 
 
-get ('/users/:id/comics') do
-	user = User.find(params[:id].to_json)
-	#API CALL
-end
+# get ('/users/:id/comics') do
+# 	user = User.find(params[:id].to_json)
+# 	#API CALL
+# end
 
-get ('/users/:id/read') do
-	user = User.find_by(id: params["id"].to_json)
-	#API CALL
-end
+# get ('/users/:id/read') do
+# 	user = User.find_by(id: params["id"].to_json)
+# 	#API CALL
+# end
 
 get ('/characters') do
 	Character.all.to_json

@@ -56,7 +56,11 @@ img.circular{
 	border-radius: 100px;
 }
 
-img {
+.fav-char-image{
 	height: 50px;
 	border-radius: 50px;
+}
+
+.comic-image {
+	height: 150px;
 }

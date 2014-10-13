@@ -41,21 +41,24 @@ var UserComicModel = Backbone.Model.extend({
 	urlRoot: '/user_comics'
 });
 
-var ComicCollection = Backbone.Model.extend({
+var ComicCollection = Backbone.Collection.extend({
 	model: ComicModel,
 	url: '/comics'
 });
 
-var UserComicCollection = Backbone.Model.extend({
+var UserComicCollection = Backbone.Collection.extend({
 	model: UserComicModel,
 	url: '/user_comics'
 });
 
 var comicCollection = new ComicCollection();
+comicCollection.fetch();
+
 var userComicCollection = new UserComicCollection();
+userComicCollection.fetch();
 
 var ComicView = Backbone.View.extend({
-	comicTemplate: _.template( $('#comic-template').html() ),
+	// comicTemplate: _.template( $('#comic-template').html() ),
 	events: {
 		"click someElement" : "seeInfo"
 	},
@@ -78,8 +81,7 @@ var ComicView = Backbone.View.extend({
 
 			thisView.$el.html('<img src="' + comic.thumbnail + '"class="comic-image"><li class="character-info"><h4>' + comic.title + '</h4></br>' + comic.date_issued + '</br>' + comic.description + '</li>')
 			// thisView.$el.html(thisView.favCharTemplate({ character: character }));
-		})
-		
+		})	
 	}
 });
 
@@ -93,34 +95,59 @@ var ComicListView = Backbone.View.extend({
 
 	addOne:function(item){
 		if (item.attributes.user_id == this.userId) {
-		   var favCharacter = new CharacterView({ model: item })
-		   favCharacter.render();
-		   this.$el.append(favCharacter.el)
+			
+		   var comic = new ComicView({ model: item })
+		   comic.render();
+		   this.$el.append(comic.el)
 		}
 	}
 });
 
-$('#add').on('click', function(){
-	var searchedName = $(".fav_characters_input").val(); //input value
-
-	var searchResult = characterCollection.where({name: searchedName});
+$('#to_buy_add').on('click', function(){
+	var searchedComic = $(".to_buy_input").val();
+	var searchResult = comicCollection.where({title: searchedComic});
 
 	if (searchResult.length != 0) {
-		console.log(searchResult[0].id)
-		favCharacter_collection.create({user_id: 5, character_id: searchResult[0].id});
-	} else {
-		console.log("Not Here")
-		character_collection.create({name: searchedName})
-		setTimeout(function() {
 
-			var charId = character_collection.where({name: searchedName})[0].id
-			favCharacter_collection.create({user_id: 5, character_id: charId});	
-		}, 4000);
+		userComicCollection.create({user_id: 5, comic_id: searchResult[0].id, bought: false});
+	}
+});
+
+$('#bought_add').on('click', function(){
+	var searchedComic = $(".bought_input").val();
+	var searchResult = comicCollection.where({title: searchedComic});
+
+	if (searchResult.length != 0) {
+
+		userComicCollection.create({user_id: 5, comic_id: searchResult[0].id, bought: true});
+	}
+});
+
+$('#to_read_add').on('click', function(){
+	var searchedComic = $(".to_read_input").val();
+	var searchResult = comicCollection.where({title: searchedComic});
+
+	if (searchResult.length != 0) {
+
+		userComicCollection.create({user_id: 5, comic_id: searchResult[0].id, read: false});
+	}
+});
+
+$('#read_add').on('click', function(){
+	var searchedComic = $(".read_input").val();
+	var searchResult = comicCollection.where({title: searchedComic});
+
+	if (searchResult.length != 0) {
+
+		userComicCollection.create({user_id: 5, comic_id: searchResult[0].id, read: true});
 	}
 });
 
 
-// var readComics = new ComicListView({ collection: userComicCollection, el: $('#fav-characters-list'), userId: 5 })
+var toBuyComics = new ComicListView({ collection: userComicCollection, el: $('.to_buy'), userId: 5 })
+var boughtComics = new ComicListView({ collection: userComicCollection, el: $('.bought'), userId: 5 })
+var toReadComics = new ComicListView({ collection: userComicCollection, el: $('.to_read'), userId: 5 })
+var readComics = new ComicListView({ collection: userComicCollection, el: $('.read'), userId: 5 })
 // 
 // 
 // NO COMIC_LIST_VIEW because we aren't showing all comics in database
@@ -196,7 +223,6 @@ var BadgeView = Backbone.View.extend({
 		this.listenTo(this.model, 'remove', this.remove);
 	},
 	render: function(){
-		console.log(this.model.attributes)
 		var thisView = this;
 		var badgeId = (this.model.attributes.badge_id);
 

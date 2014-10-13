@@ -7,9 +7,9 @@ require_relative './lib/models'
 Character.delete_all
 Comic.delete_all
 
-user = User.create(name: "Frog")
+# user = User.create(name: "Frog")
 
-fav1 = FavCharacter.create(user_id: 1, character_id: 139)
+# fav1 = FavCharacter.create(user_id: 4, character_id: 158)
 
 def create_hero(hero_name)
 	timestamp = Time.now.strftime("%H%M%S%L")

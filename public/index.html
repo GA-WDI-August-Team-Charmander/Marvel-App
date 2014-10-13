@@ -1,85 +1,217 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-	<meta charset="UTF-8">
-	<title>Marvel App</title>
 
-	<script src='./javascripts/jquery.js'></script>
-	<script src='./javascripts/underscore.js'></script>
-	<script src='./javascripts/backbone.js'></script>
-	<script src="./javascripts/bootstrap.js"></script>
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
-	<link rel="stylesheet" href="./stylesheets/styles.css">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Grayscale - Start Bootstrap Theme</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="./stylesheets/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="./stylesheets/css/grayscale.css" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href="./stylesheets/font-awesome-4.1.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" rel="stylesheet" type="text/css">
+    <link href="http://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+
+
 </head>
 
-	<script id="fav-char-template" type="text/template">
-		<img src="<% character.image_url %>" class="fav-char-image">
-		<div class="character-info">
-			<% character.name %>
-			<% character.description %>
-		</div>
-	</script>
-</head>
+<body id="page-top" data-spy="scroll" data-target=".navbar-fixed-top">
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-custom navbar-fixed-top" role="navigation">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-main-collapse">
+                    <i class="fa fa-bars"></i>
+                </button>
+                <a class="navbar-brand page-scroll" href="#page-top">
+                    <i class="fa fa-play-circle"></i>  <span class="light">Marvel</span> Application
+                </a>
+            </div>
 
 
+            <div class="collapse navbar-collapse navbar-right navbar-main-collapse">
+                <ul class="nav navbar-nav">
+                    <!-- Hidden li included to remove active class from about link when scrolled up past about section -->
+                    <li class="hidden">
+                        <a href="#page-top"></a>
+                    </li>
+                    <br>
+                    <li class="tasks">
+                        <a href="#buy_read">Buy/Read</a>
+                    </li>
+                    <br>
+                    <li class= "fav-char">
+                        <a href="#fav_char">Favorites</a>
+                    </li>
+                    <br>
+                    <li class ="activity">
+                        <a href="#activity">Activity</a>
+                    </li>
+                    <br>
+                    <li class ="badges">
+                        <a href="#badges">Badges</a>
+                    </li>
+                    <br>
+                    <li class ="groups">
+                        <a href="#groups">Groups</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Intro Header -->
+    <header class="intro">
+        <div class="intro-body">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-8 col-md-offset-2">
+                        <h1 class="brand-heading">OCTOPU</h1>
+                        	<img class= "user_image" src="https://fbcdn-sphotos-a-a.akamaihd.net/hphotos-ak-xaf1/v/t1.0-9/484341_10200865976830565_1249622264_n.jpg?oh=f89b49f3ff33f8291c6f4845bd9ad3c2&oe=54F5EE6D&__gda__=1421302758_ac30f8988ea1a8b7e9a5548183129eeb" id="user_image" class="circular">&nbsp;&nbsp;
+                        <!-- INPUT CHARACTER NAME -->
+                        <p class="intro-text">Master Octopus collector</p>
+                        <!-- INPUT CHARACTER DESCRIPTION -->
+                        <a href="#fav_char" class="btn btn-circle page-scroll">
+                            <i class="fa fa-angle-double-down animated"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    		<br>
+				<br>
+				<br>
+				<br>
+				<br>
 
 
-<body>
+    <!-- Favorite Character Section -->
+    <section id="fav_char" class="container content-section text-center">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2">
+                <h2>Favorite Characters</h2>
+      						<article id="fav-characters">
+										<input type= "text" name="fav_characters">
+										<br>
+										<br>
+										<button type= "button" class="btn btn-default">Add to my list</button>
+											<ul>
+											</ul>
+									</article>
+            </div>
+        </div>
+        <br>
+				<br>
+				<br>
+				<br>
+				<br>
+    </section>
 
-<div class = "container">
-	<div class= "page-header">
-	<h1 id="user_name">
-			<img src="https://fbcdn-sphotos-a-a.akamaihd.net/hphotos-ak-xaf1/v/t1.0-9/484341_10200865976830565_1249622264_n.jpg?oh=f89b49f3ff33f8291c6f4845bd9ad3c2&oe=54F5EE6D&__gda__=1421302758_ac30f8988ea1a8b7e9a5548183129eeb" id="user_image" class="circular">&nbsp;&nbsp;OCTOPU
-			<small>Master Octopus Collector</small>
-		</h1>
-	</div>
+    <!-- To buy to read Section -->
+    <section id="buy_read" class="content-section to-buy-section text-center">
+        <div class="buy_read">
+            <div class="container-fluid">
+                <div class="col-lg-10 col-lg-offset-2">
+                 <article id="tasks">
+                  <div class = "row">
+                    <h2 class= "col-md-3 text-left">To Buy</h2>
+                    <h2 class= "col-md-3 text-left col-md-offset-2">Bought</h2>
+                  </div>
+                  <div class = "row">
+											<input type= "text" class="to_buy_input col-md-2">
+											<input type= "text" class="bought_input
+											col-md-2 col-md-offset-3">
+									</div>
+											<br>
+											<br>
+									<div class = "row">
+											<button type="button" class="btn btn-default col-md-2" id="to_buy_add">To Buy List</button>
+											<button type="button" class = "btn btn-default col-md-2 col-md-offset-3" id="bought_add">Bought List</button>
+									</div>
+								</div>
+								<div class = "row">
+												<br>
+												<ul class ="col-md-3 col-md-offset-2 to-buy">
+												</ul>
+												<br>
+												<ul class="col-md-3 col-md-offset-1 bought">
+												</ul>
+									</div>
+										<br>
+										<br>
+										<br>
+										<br>
+										<br>
 
-	<div class="main">
-		<ul class= "nav nav-tabs col-sm-offset-5" role= "tablist">
-			<li class= "tasks"><a href="#">Buy/Read</a></li>
-			<li class="fav-char"><a href="#">Favorite Characters</a></li>
-			<li class="activity"><a href="#">Activity</a></li>
-			<li class= "badges"><a href="#">Badges</a></li>
-			<li class= "groups"><a href="#">Groups</a></li>
-		</ul>
-	</div>
+										<h2>To Read</h2>
+											<input type= "text" class="to_read_input">
+											<br>
+											<br>
+											<button type="button" class="btn btn-default" id="to_read_add">To Read List</button>
+												<ul class="to-read">
+												</ul>
+										<br>
+										<h2>Read</h2>
+											<input type= "text" class="read_input">
+											<br>
+											<br>
+											<button type="button" class = "btn btn-default" id="Read_add">Read List</button>
+												<ul class="read">
+												</ul>
+								</article>
+              </div>
+            </div>
+        </div>
+    </section>
 
-	
-		<article id="fav-characters">
-			<input type= "text" class="fav_characters_input">
-			<button id="add">Add Character to My Favorites</button>
-			<ul id="fav-characters-list">
-			</ul>
-		</article>
+    <!-- Badges Section -->
+    <section id="contact" class="container badges-section text-center">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2">
+                <h2>Badges</h2>
+                <p></p>
 
-		<article id="tasks">
-			<input type= "text" class="to_buy_input">
-			<button id="to_buy_add">Add Character to My Favorites</button>
-			<ul class="to-buy">
-			</ul>
-			<input type= "text" class="bought_input">
-			<button id="bought_add">Add Character to My Favorites</button>
-			<ul class="bought">
-			</ul>
-			<input type= "text" class="to_read_input">
-			<button id="to_read_add">Add Character to My Favorites</button>
-			<ul class= "to-read">
-			</ul>
-			<input type= "text" class="read_input">
-			<button id="read_add">Add Character to My Favorites</button>
-			<ul class= "read">
-			</ul>
-		</article>
+            </div>
+        </div>
+    </section>
 
-		<article id="badges">
-			<ul>
-			</ul>
-		</article>
-	</div>
-</div>
+    <!-- Map Section -->
+    <div id="map"></div>
 
-	
-	<script src="./javascripts/script.js"></script>
+    <!-- Footer -->
+    <footer>
+        <div class="container text-center">
+            <p>Copyright &copy; Your Website 2014</p>
+        </div>
+    </footer>
+
+    <!-- jQuery Version 1.11.0 -->
+    <script src="js/jquery-1.11.0.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="js/bootstrap.min.js"></script>
+
+    <!-- Plugin JavaScript -->
+    <script src="js/jquery.easing.min.js"></script>
+
+    <!-- Google Maps API Key - Use your own API key to enable the map feature. More information on the Google Maps API can be found at https://developers.google.com/maps/ -->
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCRngKslUGJTlibkQ3FkfTxj3Xss1UlZDA&sensor=false"></script>
+
+    <!-- Custom Theme JavaScript -->
+    <script src="js/grayscale.js"></script>
 
 </body>
+
 </html>

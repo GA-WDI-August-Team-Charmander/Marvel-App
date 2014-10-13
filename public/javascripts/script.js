@@ -87,17 +87,19 @@ var ComicView = Backbone.View.extend({
 
 var ComicListView = Backbone.View.extend({
 
-	initialize: function(option){
-		this.userId = option.userId
+	initialize: function(user, option, status){
+		this.userId = user.userId
+		this.list = option.list
+		this.bought = status.bought
 		this.listenTo(this.collection, 'add', this.addOne);
 		this.collection.fetch();
 	},
 
 	addOne:function(item){
-		if (item.attributes.user_id == this.userId) {
-			
+		if (item.attributes.user_id == this.userId && this.list == 'buy' && this.bought == false) {
 		   var comic = new ComicView({ model: item })
 		   comic.render();
+		   console.log(comic.el)
 		   this.$el.append(comic.el)
 		}
 	}
@@ -144,10 +146,10 @@ $('#read_add').on('click', function(){
 });
 
 
-var toBuyComics = new ComicListView({ collection: userComicCollection, el: $('.to_buy'), userId: 5 })
-var boughtComics = new ComicListView({ collection: userComicCollection, el: $('.bought'), userId: 5 })
-var toReadComics = new ComicListView({ collection: userComicCollection, el: $('.to_read'), userId: 5 })
-var readComics = new ComicListView({ collection: userComicCollection, el: $('.read'), userId: 5 })
+var toBuyComics = new ComicListView({ collection: userComicCollection, el: $('.to_buy'), userId: 5, list: 'buy', bought: false });
+var boughtComics = new ComicListView({ collection: userComicCollection, el: $('.bought'), userId: 5, list: 'buy', bought: true });
+var toReadComics = new ComicListView({ collection: userComicCollection, el: $('.to_read'), userId: 5, list: 'read', read: false });
+var readComics = new ComicListView({ collection: userComicCollection, el: $('.read'), userId: 5, list: 'read', read: true });
 // 
 // 
 // NO COMIC_LIST_VIEW because we aren't showing all comics in database

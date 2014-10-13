@@ -87,7 +87,7 @@ function badgeCheck_characterFan(comic, user){
 	var fav_character_array = favCharacter_collection.where({user_id: 1});
 
 	// set count
-	var badge = false;
+	// var badge = false;
 
 	// check criteria
 	_.each(fav_character_array, function(fav_character){
@@ -105,6 +105,7 @@ function badgeCheck_characterFan(comic, user){
 	});
 
 }
+
 
 
 

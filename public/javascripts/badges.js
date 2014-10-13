@@ -1,4 +1,16 @@
 
+function badgeCheck(){
+	badgeCheck_avidReader();
+}
+
+function badgeCheck_avidReader(){
+	var this_userId = 5;
+	var usersComicCollection = usersComic.where({user_id: 1});
+	var readNumber = usersComicCollection.where({read: true}).length;
+
+
+}
+
 Avid_reader_badge
 --> a badge based on how many toRead items he has read
 

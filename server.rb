@@ -112,7 +112,11 @@ get ('/user_comics') do
 end
 
 post ('/user_comics') do
-	Users_comic.create({user_id: params["user_id"], comic_id: params["comic_id"]})
+	if params["bought"] == nil 
+		Users_comic.create({user_id: params["user_id"], comic_id: params["comic_id"], read: params["read"]})
+	else
+		Users_comic.create({user_id: params["user_id"], comic_id: params["comic_id"], bought: params["bought"]})
+	end
 end
 
 get ('/user_badges') do
@@ -123,20 +127,20 @@ post ('/user_badges') do
 	Users_badge.create({user_id: params["user_id"], badge_id: params["badge_id"]})
 end
 
-get ('/users/:id/badges') do
-	user = User.find(params[:id].to_json)
-	#API CALL
-end 
+# get ('/users/:id/badges') do
+# 	user = User.find(params[:id].to_json)
+# 	#API CALL
+# end 
 
-get ('/users/:id/comics') do
-	user = User.find(params[:id].to_json)
-	#API CALL
-end
+# get ('/users/:id/comics') do
+# 	user = User.find(params[:id].to_json)
+# 	#API CALL
+# end
 
-get ('/users/:id/read') do
-	user = User.find_by(id: params["id"].to_json)
-	#API CALL
-end
+# get ('/users/:id/read') do
+# 	user = User.find_by(id: params["id"].to_json)
+# 	#API CALL
+# end
 
 get ('/characters') do
 	Character.all.to_json
@@ -173,7 +177,7 @@ post ('/comics') do
 end
 
 get ('/badges') do
-	Badges.all.to_json
+	Badge.all.to_json
 end
 
 get ('/badges/:id') do

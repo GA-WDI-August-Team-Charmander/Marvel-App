@@ -74,4 +74,39 @@ Modern Age of Comics reader badge
 
 
 
+Reading a comic with his fav character in it badge
+
+task_flow:
+//user reads comic
+users_comic['read'] -> true, do the follwoing
+var this_comic_id = users_comic['comic_id']
+var this_user_id = 1
+
+//get all userComics and favCharcters belonging to user with id: 1
+var user_comic_array = usersComic_collection.where({user_id: 1}) //filter
+var fav_character_array = favCharacter_collection.where({user_id: 1})
+
+var badge = false;
+
+_.each(fav_character_array, function(item){
+	var this_marvel_char = character_collection.findWhere( { id: item['char_id'] } );
+	var this_marvel_comic = comic_collection.findWhere( {id: this_comic_id});
+	_.each(charactersComic_collection, function(charComic){
+		if (charComic['comic_id'] == this_marvel_comic['id'] && charComic['character_id'] == this_marvel_char['id']){
+			badge = true;
+			badge.render
+			return
+		}
+
+	}
+});
+
+
+//if comic contains favourite character, get badge
+
+
+
+
+
+
 

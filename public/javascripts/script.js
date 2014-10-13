@@ -412,3 +412,30 @@ var FormView = Backbone.View.extend({
 
 	}
 });
+
+
+comicArray = []
+function autoComplete(searchBar) {
+	comicCollection.fetch().done(function() {
+		_.each(comicCollection.models, function(model) {
+			comicArray.push(model.attributes.title)
+		});
+		searchBar.autocomplete({source: comicArray});
+	})	
+};
+
+_.each($('.add_comic'), function(input) {
+	console.log(input)
+	autoComplete(input);
+})
+
+
+
+
+
+
+
+
+
+
+

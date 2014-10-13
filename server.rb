@@ -103,27 +103,25 @@ get ('/fav_characters') do
 	FavCharacter.all.to_json
 end
 
-# get ('/users/:id/fav_characters') do
-# 	user = User.find(params[:id])
-# 	binding.pry
-# #API CALL
-# end
-
 post ('/fav_characters') do
 	FavCharacter.create({user_id: params["user_id"], character_id: params["character_id"]})
 end
 
-# get ('/users/:id/fav_characters/:id2') do 
-# 	user = User.find(params[:id].to_json)
-# 	fav_character = Fav_character.find(params[:id]).to_json#id2
-# end
+get ('/user_comics') do
+	Users_comic.all.to_json
+end
 
-# delete ('/users/:id/fav_characters/:id2') do
-# 	user = User.find(params[:id].to_json)
-# 	fav_character = Fav_character.find(params[:id])#id2
-# 	fav_character.destory
-# 	fav_character.to_json
-# end
+post ('/user_comics') do
+	Users_comic.create({user_id: params["user_id"], comic_id: params["comic_id"]})
+end
+
+get ('/user_badges') do
+	Users_badge.all.to_json
+end
+
+post ('/user_badges') do
+	Users_badge.create({user_id: params["user_id"], badge_id: params["badge_id"]})
+end
 
 get ('/users/:id/badges') do
 	user = User.find(params[:id].to_json)
@@ -150,7 +148,10 @@ get ('/characters/:id') do
 end
 
 post('/characters') do
-	create_hero(params["name"])	
+	binding
+	create_hero(params["name"])
+	# user_id = 5
+	# FavCharacter.create({user_id: user_id, character_id: new_character_id})	
 end
 
 get ('/characters/:api_id/comics') do

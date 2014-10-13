@@ -1,18 +1,3 @@
-
-
-function addUserButton(){
-	$('#add_user_button').on('click', function(){
-		$.post('/users', { name: $('add_user_input').val() } );
-	});
-	console.log("#add_user button and input now listening!");
-}
-
-
-
-
-
-
-
 //~<*{{ User }}*>~ --------------------------------
 
 var User_Model = Backbone.Model.extend({
@@ -36,22 +21,106 @@ var user_collection = new User_Collection();
 
 
 
-//~<*{{ Comic }}*>~ --------------------------------
+// ~<*{{ Comic }}*>~ --------------------------------
+// 
+// 
 
-var Comic_Model = Backbone.Model.extend({
+var ComicModel = Backbone.Model.extend({
 	initialize: function(){
 		console.log("New comic initialised!");
 	},
 	urlRoot: '/comics'
 });
 
-var Comic_Collection = Backbone.Model.extend({
-	model: Comic_Model,
+var UserComicModel = Backbone.Model.extend({
+	initialize: function(){
+		console.log("New comic initialised!");
+	},
+	urlRoot: '/user_comics'
+});
+
+var ComicCollection = Backbone.Model.extend({
+	model: ComicModel,
 	url: '/comics'
 });
 
-var comic_collection = new Comic_Collection();
+var UserComicCollection = Backbone.Model.extend({
+	model: UserComicModel,
+	url: '/user_comics'
+});
 
+var comicCollection = new ComicCollection();
+var userComicCollection = new UserComicCollection();
+
+// var ComicView = Backbone.View.extend({
+// 	comicTemplate: _.template( $('#comic-template').html() ),
+// 	events: {
+// 		"click someElement" : "seeInfo"
+// 	},
+
+// 	seeInfo: function() {
+// 		var modal = new InfoModalView({ model: this.model });
+// 	},
+
+// 	initialize: function(){
+// 		this.listenTo(this.model, 'change', this.render);
+// 		this.listenTo(this.model, 'destroy', this.remove);
+// 	},
+
+// 	render:function(){
+// 		var thisView = this;
+// 		var comicId = (this.model.attributes.comic_id);
+
+// 		comicCollection.fetch().done(function() {
+// 			var comic = comicCollection.where({id: comicId})[0].attributes;
+
+// 			thisView.$el.html('<img src="' + comic.thumbnail + '"class="comic-image"><li class="character-info"><h4>' + comic.title + '</h4></br>' + comic.date_issued + '</br>' + comic.description + '</li>')
+// 			// thisView.$el.html(thisView.favCharTemplate({ character: character }));
+// 		})
+		
+// 	}
+// });
+
+// var ComicListView = Backbone.View.extend({
+
+// 	initialize: function(option){
+// 		this.userId = option.userId
+// 		this.listenTo(this.collection, 'add', this.addOne);
+// 		this.collection.fetch();
+// 	},
+
+// 	addOne:function(item){
+// 		if (item.attributes.user_id == this.userId) {
+// 		   var favCharacter = new CharacterView({ model: item })
+// 		   favCharacter.render();
+// 		   this.$el.append(favCharacter.el)
+// 		}
+// 	}
+// });
+
+// $('#add').on('click', function(){
+// 	var searchedName = $(".fav_characters_input").val(); //input value
+
+// 	var searchResult = characterCollection.where({name: searchedName});
+
+// 	if (searchResult.length != 0) {
+// 		console.log(searchResult[0].id)
+// 		favCharacter_collection.create({user_id: 5, character_id: searchResult[0].id});
+// 	} else {
+// 		console.log("Not Here")
+// 		character_collection.create({name: searchedName})
+// 		setTimeout(function() {
+
+// 			var charId = character_collection.where({name: searchedName})[0].id
+// 			favCharacter_collection.create({user_id: 5, character_id: charId});	
+// 		}, 4000);
+// 	}
+// });
+
+
+// var readComics = new ComicListView({ collection: userComicCollection, el: $('#fav-characters-list'), userId: 5 })
+// 
+// 
 // NO COMIC_LIST_VIEW because we aren't showing all comics in database
 // this is all comics not just the user's
 
@@ -83,6 +152,14 @@ var character_collection = new Character_Collection();
 
 
 //~<*{{ Badge }}*>~ --------------------------------
+var UsersBadge_Model = Backbone.Model.extend({
+	initialize: function(){
+		console.log("New Badge initialised!");
+	},
+
+	urlRoot: '/user_badges'
+});
+
 var Badge_Model = Backbone.Model.extend({
 	initialize: function(){
 		console.log("New Badge initialised!");
@@ -91,16 +168,55 @@ var Badge_Model = Backbone.Model.extend({
 	urlRoot: '/badges'
 });
 
+var UsersBadge_Collection = Backbone.Collection.extend({
+	model: UsersBadge_Model,
+	url: '/user_badges'
+});
+
 var Badge_Collection = Backbone.Collection.extend({
 	model: Badge_Model,
 	url: '/badges'
 });
 
-var badge_collection = new Badge_Collection();
-// var badge_list_view = new List_View( {collection: badge_collection} );
-//this badge view is to show all possible badges user can earn.
-// the ones the user has not earned will be 
+var usersBadge_collection = new UsersBadge_Collection();
+usersBadge_collection.fetch();
 
+var badge_collection = new Badge_Collection();
+badge_collection.fetch();
+
+var BadgeView = Backbone.View.extend({
+	className: 'badge',
+	initialize: function(){
+		this.listenTo(this.model, 'remove', this.remove);
+	},
+	render: function(){
+		console.log(this.model.attributes)
+
+	badge_collection.fetch().done(function() {
+		var badge = badge_collection.where({id: badgeId})[0].attributes;
+
+		thisView.$el.html('<img src="' + character.image_url + '"class="fav-char-image"><li class="character-info"><h4>' + character.name + '</h4></br>' + character.description + '</li>')
+		this.$el.html("<img src=''><h4>" + "badge_name" + "</h4>")
+	}
+});
+
+var BadgeListView = Backbone.View.extend({
+	tagName: 'section',
+	className: 'badge-list',
+	initialize: function(option){
+		this.userId = option.userId;
+		this.listenTo(this.collection, 'add', this.addOne);
+		this.listenTo(this.collection, 'change', this.render);
+		this.collection.fetch();
+	},
+	addOne: function(item){
+		var badgeView = new BadgeView({ model: item});
+		badgeView.render();
+		this.$el.append(badgeView.el);
+	}
+});
+
+var usersBadges = new BadgeListView({ collection: badge_collection, el: $('#badges'), userId: 5});
 
 
 
@@ -152,6 +268,8 @@ var List_View = Backbone.View.extend({
 
 
 //~<*{{ FavCharacters }}*>~ --------------------------------
+// 
+// 
 
 
 var FavCharacter_Model = Backbone.Model.extend({
@@ -218,16 +336,18 @@ $('#add').on('click', function(){
 	var searchedName = $(".fav_characters_input").val(); //input value
 
 	var searchResult = character_collection.where({name: searchedName});
-	console.log(searchResult);
+
 	if (searchResult.length != 0) {
 		console.log(searchResult[0].id)
 		favCharacter_collection.create({user_id: 5, character_id: searchResult[0].id});
 	} else {
 		console.log("Not Here")
-		character_collection.create({name: searchedName}).done(function() {
-			favCharacter_collection.create({user_id: 5, character_id: searchResult[0].id});
-		})
-		
+		character_collection.create({name: searchedName})
+		setTimeout(function() {
+
+			var charId = character_collection.where({name: searchedName})[0].id
+			favCharacter_collection.create({user_id: 5, character_id: charId});	
+		}, 4000);
 	}
 });
 

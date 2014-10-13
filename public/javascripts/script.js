@@ -49,6 +49,7 @@ var ComicCollection = Backbone.Model.extend({
 var UserComicCollection = Backbone.Model.extend({
 	model: UserComicModel,
 	url: '/user_comics'
+	
 });
 
 var comicCollection = new ComicCollection();

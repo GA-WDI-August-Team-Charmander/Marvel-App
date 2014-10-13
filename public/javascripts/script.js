@@ -49,6 +49,7 @@ var ComicCollection = Backbone.Collection.extend({
 var UserComicCollection = Backbone.Collection.extend({
 	model: UserComicModel,
 	url: '/user_comics'
+	
 });
 
 var comicCollection = new ComicCollection();
@@ -398,24 +399,3 @@ var FormView = Backbone.View.extend({
 
 	}
 });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

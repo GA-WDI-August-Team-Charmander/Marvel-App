@@ -6,6 +6,7 @@ require_relative './lib/models'
 
 Character.delete_all
 Comic.delete_all
+Badge.delete_all
 
 # user = User.create(name: "Frog")
 
@@ -81,6 +82,20 @@ end
 
 get_character_comics("Spider-Man")
 
+Badge.create({name: "Avid Reader - 1"});
+Badge.create({name: "Avid Reader - 5"});
+Badge.create({name: "Avid Reader - 10"});
+Badge.create({name: "Avid Reader - 20"});
+Badge.create({name: "Avid Reader - 50"});
+Badge.create({name: "Avid Reader - 100"});
+
+# when they read 5 or more from one age:
+Badge.create({name: "Badge of the Ages - Golden Age of Comics: 1938-1950"});
+Badge.create({name: "Badge of the Ages - Silver Age of Comics: 1951-1970"});
+Badge.create({name: "Badge of the Ages - Bronze Age of Comics: 1971-1985"});
+Badge.create({name: "Badge of the Ages - Modern Age of Comics: 1986-Now"});
+
+Badge.create({name: "Character Fan"});
 
 
 

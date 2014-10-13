@@ -2,6 +2,7 @@ require 'rubygems'
 require 'bundler/setup'
 Bundler.require(:default)
 require 'sinatra'
+require 'uri'
 require_relative './db/connection'
 require_relative './lib/models'
 require 'active_support'
@@ -149,7 +150,6 @@ get ('/characters/:id') do
 end
 
 post('/characters') do
-	binding.pry
 	create_hero(params["name"])	
 end
 

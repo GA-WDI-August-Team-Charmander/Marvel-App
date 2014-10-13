@@ -171,19 +171,25 @@ var CharacterView = Backbone.View.extend({
 	favCharTemplate: _.template( $('#fav-char-template').html() ),
 	className: 'fav-char-el',
 	events: {
-		"click someElement" : "seeInfo",
+		"click someElement" : "seeInfo"
 	},
 
 	seeInfo: function() {
 		var modal = new InfoModalView({ model: this.model });
 	},
 
+	initialize: function(){
+		this.listenTo(this.model, 'change', this.render);
+		this.listenTo(this.model, 'destroy', this.remove);
+	},
+
 	render:function(){
 		var thisView = this;
 		var characterId = (this.model.attributes.character_id);
-		console.log(characterId); //**>{{}}>~~
 
 		character_collection.fetch().done(function() {
+			var character = character_collection.where({id: characterId})[0].attributes;
+
 
 			var character = character_collection.where({id: characterId})[0].attributes
 			console.log(character) //**>{{}}>~~
@@ -191,6 +197,7 @@ var CharacterView = Backbone.View.extend({
 
 			console.log(character.image_url)	
 			console.log(thisView.$el.html())
+
 			thisView.$el.html('<img src="' + character.image_url + '"class="fav-char-image"><li class="character-info"><h4>' + character.name + '</h4></br>' + character.description + '</li>')
 
 			// thisView.$el.html(thisView.favCharTemplate({ character: character }));
@@ -216,28 +223,49 @@ var FavCharacterListView = Backbone.View.extend({
 	}
 });
 
+$('#add').on('click', function(){
+	var searchedName = $(".fav_characters_input").val(); //input value
 
-var favCharacters = new FavCharacterListView({ collection: favCharacter_collection, el: $('#results'), userId: 4})
+	var searchResult = character_collection.where({name: searchedName});
+	console.log(searchResult);
+	if (searchResult.length != 0) {
+		console.log(searchResult[0].id)
+		favCharacter_collection.create({user_id: 5, character_id: searchResult[0].id});
+	} else {
+		console.log("Not Here")
+		character_collection.create({name: searchedName}).done(function() {
+			favCharacter_collection.create({user_id: 5, character_id: searchResult[0].id});
+		})
+		
+	}
+});
+
+
+var favCharacters = new FavCharacterListView({ collection: favCharacter_collection, el: $('#fav-characters-list'), userId: 5 })
 
 var FormView = Backbone.View.extend({
+
 	events: {
-		"click i#addButton" : "addFavCharacter",
+		"click button#add" : "addFavCharacter"
 	},
 
 	addFavCharacter: function() {
-		var searchedName = this.$el.find('input[name="character-name"]').val(); //input value
-		var searchResult = character_collection.findWhere({name: searchedName});
+		console.log("here")
+		var searchedName = this.el.val(); //input value
+		var searchResult = character_collection.where({name: searchedName});
 
 		if (searchResult.length != 0) {
+			console.log(this.collection)
 			this.collection.create({user_id: this.userId, character_id: searchResult.id});
 		} else {
+			console.log("Not Here")
 			character_collection.create({name: searchedName});
 		}
 
 	}
 });
-character_collection.create({name: "Blackheart"});
-var formView = new FormView({ el: $("#fav_characters"), collection: favCharacter_collection, userId: 4 });
+
+// var formView = new FormView({ el: $(".fav_characters_input"), collection: favCharacter_collection, userId: 5 });
 
 //~<*{{ CharactersComics }}*>~ --------------------------------
 

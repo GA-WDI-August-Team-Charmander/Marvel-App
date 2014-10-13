@@ -1,8 +1,6 @@
 CREATE DATABASE marvel_app;
 \c marvel_app;
 
-DROP TABLE fav_characters;
-
 CREATE TABLE users (
 id serial primary key,
 name varchar(255)

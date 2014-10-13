@@ -8,9 +8,7 @@ Character.delete_all
 Comic.delete_all
 Badge.delete_all
 
-# user = User.create(name: "Frog")
-
-# fav1 = FavCharacter.create(user_id: 4, character_id: 158)
+user = User.create(name: "Joe")
 
 def create_hero(hero_name)
 	timestamp = Time.now.strftime("%H%M%S%L")
@@ -37,7 +35,6 @@ end
 create_hero("captain america")
 create_hero("spider-man")
 create_hero("black widow")
-create_hero("elektra")
 create_hero("wolverine")
 create_hero("hulk")
 create_hero("cyclops")

@@ -80,7 +80,7 @@ var ComicView = Backbone.View.extend({
 		comicCollection.fetch().done(function() {
 			var comic = comicCollection.where({id: comicId})[0].attributes;
 
-			thisView.$el.html('<img src="' + comic.thumbnail + '"class="comic-image"><li class="character-info"><h4>' + comic.title + '</h4></br>' + comic.date_issued + '</br>' + comic.description + '</li>')
+			thisView.$el.html('<img src="' + comic.thumbnail + '"class="comic-image">')//<li class="character-info"><h4>' + comic.title + '</h4></br>' + comic.date_issued + '</br>' + comic.description + '</li>')
 			// thisView.$el.html(thisView.favCharTemplate({ character: character }));
 		})	
 	}
@@ -126,7 +126,7 @@ $('#to_buy_add').on('click', function(){
 
 	if (searchResult.length != 0) {
 
-		userComicCollection.create({user_id: 5, comic_id: searchResult[0].id, bought: false});
+		userComicCollection.create({user_id: 1, comic_id: searchResult[0].id, bought: false});
 	}
 });
 
@@ -136,7 +136,7 @@ $('#bought_add').on('click', function(){
 
 	if (searchResult.length != 0) {
 
-		userComicCollection.create({user_id: 5, comic_id: searchResult[0].id, bought: true});
+		userComicCollection.create({user_id: 1, comic_id: searchResult[0].id, bought: true});
 	}
 });
 
@@ -145,7 +145,7 @@ $('#to_read_add').on('click', function(){
 	var searchResult = comicCollection.where({title: searchedComic});
 	if (searchResult.length != 0) {
 
-		userComicCollection.create({user_id: 5, comic_id: searchResult[0].id, read: false});
+		userComicCollection.create({user_id: 1, comic_id: searchResult[0].id, read: false});
 	}
 });
 
@@ -155,15 +155,15 @@ $('#read_add').on('click', function(){
 
 	if (searchResult.length != 0) {
 
-		userComicCollection.create({user_id: 5, comic_id: searchResult[0].id, read: true});
+		userComicCollection.create({user_id: 1, comic_id: searchResult[0].id, read: true});
 	}
 });
 
 
-var toBuyComics = new ComicListView({ collection: userComicCollection, el: $('.to_buy'), userId: 5, list: 'buy', status: false });
-var boughtComics = new ComicListView({ collection: userComicCollection, el: $('.bought'), userId: 5, list: 'buy', status: true });
-var toReadComics = new ComicListView({ collection: userComicCollection, el: $('.to_read'), userId: 5, list: 'read', status: false });
-var readComics = new ComicListView({ collection: userComicCollection, el: $('.read'), userId: 5, list: 'read', status: true });
+var toBuyComics = new ComicListView({ collection: userComicCollection, el: $('.to_buy'), userId: 1, list: 'buy', status: false });
+var boughtComics = new ComicListView({ collection: userComicCollection, el: $('.bought'), userId: 1, list: 'buy', status: true });
+var toReadComics = new ComicListView({ collection: userComicCollection, el: $('.to_read'), userId: 1, list: 'read', status: false });
+var readComics = new ComicListView({ collection: userComicCollection, el: $('.read'), userId: 1, list: 'read', status: true });
 // 
 // 
 // NO COMIC_LIST_VIEW because we aren't showing all comics in database
@@ -192,6 +192,7 @@ var Character_Collection = Backbone.Collection.extend({
 });
 
 var character_collection = new Character_Collection();
+character_collection.fetch();
 // NO CHARCTER_LIST_VIEW because the user will be searching through this collection
 // NO CHARACTER_LIST_VIEW because we're not showing all the characters in the db.
 
@@ -266,7 +267,7 @@ var BadgeListView = Backbone.View.extend({
 	}
 });
 
-var usersBadges = new BadgeListView({ collection: usersBadge_collection, el: $('#badges'), userId: 5});
+var usersBadges = new BadgeListView({ collection: usersBadge_collection, el: $('#badges'), userId: 1});
 
 
 
@@ -323,7 +324,7 @@ var favCharacter_collection = new FavCharacter_Collection();
 
 
 var CharacterView = Backbone.View.extend({
-	favCharTemplate: _.template( $('#fav-char-template').html() ),
+	// favCharTemplate: _.template( $('#fav-char-template').html() ),
 	className: 'fav-char-el',
 	events: {
 		"click someElement" : "seeInfo"
@@ -344,8 +345,8 @@ var CharacterView = Backbone.View.extend({
 
 		character_collection.fetch().done(function() {
 			var character = character_collection.where({id: characterId})[0].attributes;
-
-			thisView.$el.html('<img src="' + character.image_url + '"class="fav-char-image"><li class="character-info"><h4>' + character.name + '</h4></br>' + character.description + '</li>')
+			console.log(thisView.$el)
+			thisView.$el.html('<img src="' + character.image_url + '"class="fav-char-image">')//<li class="character-info"><h4>' + character.name + '</h4></br>' + character.description + '</li>')
 			// thisView.$el.html(thisView.favCharTemplate({ character: character }));
 		})
 		
@@ -369,27 +370,28 @@ var FavCharacterListView = Backbone.View.extend({
 	}
 });
 
-$('#add').on('click', function(){
-	var searchedName = $(".fav_characters_input").val(); //input value
-
+$('.add-character').on('click', function() {
+	var searchedName = $(".fav_characters_input").val();
 	var searchResult = character_collection.where({name: searchedName});
-
+	console.log(character_collection)
+	console.log(searchedName)
+	console.log(searchResult)
 	if (searchResult.length != 0) {
 		console.log(searchResult[0].id)
-		favCharacter_collection.create({user_id: 5, character_id: searchResult[0].id});
-	} else {
-		console.log("Not Here")
-		character_collection.create({name: searchedName})
-		setTimeout(function() {
+		favCharacter_collection.create({user_id: 1, character_id: searchResult[0].id});
+	// } else {
+	// 	console.log("Not Here")
+	// 	character_collection.create({name: searchedName})
+	// 	setTimeout(function() {
 
-			var charId = character_collection.where({name: searchedName})[0].id
-			favCharacter_collection.create({user_id: 5, character_id: charId});	
-		}, 4000);
+	// 		var charId = character_collection.where({name: searchedName})[0].id
+	// 		favCharacter_collection.create({user_id: 1, character_id: charId});	
+	// 	}, 4000);
 	}
 });
 
 
-var favCharacters = new FavCharacterListView({ collection: favCharacter_collection, el: $('#fav-characters-list'), userId: 5 })
+var favCharacters = new FavCharacterListView({ collection: favCharacter_collection, el: $('#fav-characters-list'), userId: 1 })
 
 var FormView = Backbone.View.extend({
 
@@ -414,13 +416,13 @@ var FormView = Backbone.View.extend({
 });
 
 
-comicArray = []
+comicsArray = []
 function autoComplete(searchBar) {
 	comicCollection.fetch().done(function() {
 		_.each(comicCollection.models, function(model) {
-			comicArray.push(model.attributes.title)
+			comicsArray.push(model.attributes.title)
 		});
-		searchBar.autocomplete({source: comicArray});
+		searchBar.autocomplete({source: comicsArray});
 	})	
 };
 

@@ -385,3 +385,8 @@ ul.bought {
     padding-bottom: 30px;
     display: inline-block;
 }
+
+.fav-char-image {
+    height: 100px;
+    border-radius: 100px;
+}

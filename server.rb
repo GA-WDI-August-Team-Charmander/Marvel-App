@@ -112,7 +112,11 @@ get ('/user_comics') do
 end
 
 post ('/user_comics') do
-	Users_comic.create({user_id: params["user_id"], comic_id: params["comic_id"]})
+	if params["bought"] == nil 
+		Users_comic.create({user_id: params["user_id"], comic_id: params["comic_id"], read: params["read"]})
+	else
+		Users_comic.create({user_id: params["user_id"], comic_id: params["comic_id"], bought: params["bought"]})
+	end
 end
 
 get ('/user_badges') do

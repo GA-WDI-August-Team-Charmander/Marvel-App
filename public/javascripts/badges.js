@@ -1,120 +1,110 @@
 
 function badgeCheck(){
 	badgeCheck_avidReader();
+	badgeCheck_badgeOfTheAges();
+
+	// badgeCheck_characterFan(comic, user);
 }
 
 function badgeCheck_avidReader(){
-	var this_userId = 5;
-	var usersComicCollection = usersComic.where({user_id: 1});
-	var readNumber = usersComicCollection.where({read: true}).length;
+	// ~<*{{ initial variables }}*>~
+	var this_user_id = 5;
+	var this_user_comicCollection = userComicCollection.where({user_id: this_user_id});
+	var readQty = this_user_comicCollection.where({read: true}).length;
 
-
-}
-
-Avid_reader_badge
---> a badge based on how many toRead items he has read
-
-PROCESS:
-
-for user 1
-var usersComicCollection = usersComic.where({user_id: 1})
-var readNumber = usersComicCollection.where({read: true}).length
-
-if(readNumber==1){
-	avid_reader_1.render()
-} else if (readNumber==3){
-	avid_reader_3.render()
-} else if (readNumber==7){
-	avid_reader_7.render()
-}
-
-BADGES: 
-// Avid Reader 1
-// Avid Reader 3
-// Avid Reader 7
-// Avid reader 10
-// Avid reader 20
-// Avid reader 50
-// Avid reader 100
-
-
-Age of Comics badges
-var usersComicCollection = usersComic.where({user_id: 1})
-var usersReadCollection = usersReadCollection.where({read: true})
-var count_goldenAge = 0;
-var count_silverAge = 0;
-var count_bronzeAge = 0;
-var count_modernAge = 0;
-_.each(usersReadCollection, function(comic){
-	if(comic['date_issued'].split('-')[0] > 1985){
-		count_modernAge += 1;
-	} else if(comic['date_issued'].split('-')[0] > 1970) {
-		count_bronzeAge += 1;
-	} else if(comic['date_issued'].split('-')[0] > 1950) {
-		count_silverAge += 1;
-	} else if(comic['date_issued'].split('-')[0] > 1937) {
-		count_goldenAge += 1;
+	// ~<*{{ give badges }}*>~
+	if(readQty == 1){
+		//Badge.destroy( {});
+		//Badge.create( {name: "avid_reader_1"} );
+	} else if (readQty == 5){
+		//Badge.create( {name: 'avid_reader_5'} );
+	} else if (readQty == 10){
+		//Badge.create( {name: 'avid_reader_10'} );
+	} else if (readQty == 20){
+		//Badge.create( {name: 'avid_reader_20'} );
+	} else if (readQty == 50){
+		//Badge.create( {name: 'avid_reader_50'} );
+	} else if (readQty == 100){
+		//Badge.create( {name: 'avid_reader_100'} );
 	}
-});
-
-if(count_goldenAge >= 5){
-	badge_goldenAge.create();
-}
-if(count_silverAge >= 5){
-	badge_silverAge.create();
-}
-if(count_bronzeAge >= 5){
-	badge_bronzeAge.create();
-}
-if(count_modernAge >= 5){
-	badge_modernAge.create();
 }
 
-Golden Age of Comics reader badge 
-1938-1950
-
-Silver Age of Comics reader badge
-1951-1970
 
 
-Bronze Age of Comics reader badge
-1971-1985
+function badgeCheck_badgeOfTheAges(){
+	// ~<*{{ initial variables }}*>~
+	var this_user_id = 5;
+	var this_user_comicCollection = userComicCollection.where({user_id: this_user_id});
+	var comicsReadByUser = this_user_comicCollection.where({read: true});
 
-Modern Age of Comics reader badge
-1986-now
+	// ~<*{{ set counts }}*>~
+	var count_goldenAge = 0;
+	var count_silverAge = 0;
+	var count_bronzeAge = 0;
+	var count_modernAge = 0;
 
+	// ~<*{{ increment counts based on date published }}*>~
+	_.each(comicsReadByUser, function(comic){
+		var yearValue_unparsed = comic['date_issued'].split('-')[0]
+		var yearValue = parseInt( yearValue_unparsed );
 
-
-
-Reading a comic with his fav character in it badge
-
-task_flow:
-//user reads comic
-users_comic['read'] -> true, do the follwoing
-var this_comic_id = users_comic['comic_id']
-var this_user_id = 1
-
-//get all userComics and favCharcters belonging to user with id: 1
-var user_comic_array = usersComic_collection.where({user_id: 1}) //filter
-var fav_character_array = favCharacter_collection.where({user_id: 1})
-
-var badge = false;
-
-_.each(fav_character_array, function(item){
-	var this_marvel_char = character_collection.findWhere( { id: item['char_id'] } );
-	var this_marvel_comic = comic_collection.findWhere( {id: this_comic_id});
-	_.each(charactersComic_collection, function(charComic){
-		if (charComic['comic_id'] == this_marvel_comic['id'] && charComic['character_id'] == this_marvel_char['id']){
-			badge = true;
-			badge.render
-			return
+		if(yearValue > 1985){
+			count_modernAge += 1;
+		} else if(yearValue > 1970) {
+			count_bronzeAge += 1;
+		} else if(yearValue > 1950) {
+			count_silverAge += 1;
+		} else if(yearValue > 1937) {
+			count_goldenAge += 1;
 		}
+	});
 
+	// ~<*{{ give badge based on age }}*>~
+	// separate if statemetns because they are not mutually exclusive
+	if(count_goldenAge >= 5){
+		// badge_goldenAge.create();
 	}
-});
+	if(count_silverAge >= 5){
+		// badge_silverAge.create();
+	}
+	if(count_bronzeAge >= 5){
+		// badge_bronzeAge.create();
+	}
+	if(count_modernAge >= 5){
+		// badge_modernAge.create();
+	}
+
+}
 
 
-//if comic contains favourite character, get badge
+function badgeCheck_characterFan(comic, user){
+	// ~<*{{ initial variables }}*>~
+	var this_comic_id = comic['comic_id'];
+	var this_user_id = user['id'];
+
+	// ~<*{{ get all of thisUser's userComics and favCharacters }}*>~
+	var this_user_comic_array = userComicCollection.where({user_id: this_user_id});
+	var fav_character_array = favCharacter_collection.where({user_id: 1});
+
+	// set count
+	var badge = false;
+
+	// check criteria
+	_.each(fav_character_array, function(fav_character){
+		var this_marvel_char = character_collection.findWhere( { id: fav_character['char_id'] } ); //find this char
+		var this_marvel_comic = comic_collection.findWhere( {id: this_comic_id}); //find this comic
+		_.each(charactersComic_collection, function(charComic){
+			if (charComic['comic_id'] == this_marvel_comic['id'] && charComic['character_id'] == this_marvel_char['id']){
+				// badge = true;
+
+				//render badge();
+				return
+			}
+
+		}
+	});
+
+}
 
 
 

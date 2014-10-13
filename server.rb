@@ -173,7 +173,7 @@ post ('/comics') do
 end
 
 get ('/badges') do
-	Badges.all.to_json
+	Badge.all.to_json
 end
 
 get ('/badges/:id') do

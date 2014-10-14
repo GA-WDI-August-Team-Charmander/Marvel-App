@@ -487,3 +487,18 @@ input.read_input {
 #fav_input {
     color: black;
 }
+
+.fav-char-el {
+    width: 100px;
+    display: inline-block;
+    margin-right: 20px;
+    margin-top: 20px;
+}
+
+#fav_character_list {
+    display: inline;
+}
+
+img {
+    cursor: pointer;
+}

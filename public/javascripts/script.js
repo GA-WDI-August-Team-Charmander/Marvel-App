@@ -428,23 +428,17 @@ var FormView = Backbone.View.extend({
 	}
 });
 
+var comicArray = []
 
-comicsArray = []
-function autoComplete(searchBar) {
-	comicCollection.fetch().done(function() {
-		_.each(comicCollection.models, function(model) {
-			comicsArray.push(model.attributes.title)
-		});
-		searchBar.autocomplete({source: comicsArray});
-	})	
-};
+comicCollection.fetch().done(function(){
+	comicCollection.forEach(function(comic){
+		comicArray.push(comic.attributes.title)
+	})
+	_.each($('.add_comic'), function(input) {
+		input.autocomplete({source: comicArray})
+	})
 
-_.each($('.add_comic'), function(input) {
-	console.log(input)
-	autoComplete(input);
 })
-
-
 
 
 // var userBadges = usersBadge_collection.where({user_id: 1})
@@ -495,7 +489,15 @@ function badgeSetUp(){
 
 badgeSetUp()
 
-
+$('.to-buy, .bought, .to-read, .read').sortable({connectWith: '.list'}).disableSelection();
+// $('.list').on( "sortupdate", function( event, ui ) {
+// 	var comicId = ui.item.children()[0].id;
+// 	var contact = contacts.get(contactId);
+// 	console.log(contact)
+// 	console.log(event.target.id)
+// 	contact.set('category_id', Number(event.target.id));
+// 	contact.save();
+// });
 
 
 

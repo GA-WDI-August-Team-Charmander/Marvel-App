@@ -9,12 +9,12 @@
 	<meta name="description" content="">
 	<meta name="author" content="">
 
-	<title>Marvelist</title>
+	<title>Marvilist</title>
 
 	<script src='./javascripts/jquery.js'></script>
 	<script src='./javascripts/underscore.js'></script>
 	<script src='./javascripts/backbone.js'></script>
-	<script src="./javascripts/bootstrap.js"></script>
+
 
 	<!-- Bootstrap Core CSS -->
 	<link href="./stylesheets/css/bootstrap.min.css" rel="stylesheet">
@@ -27,8 +27,6 @@
 	<link href="http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" rel="stylesheet" type="text/css">
 	<link href="http://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
 
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
-
 
 </head>
 
@@ -36,7 +34,7 @@
 
 	<!-- Navigation -->
 	<nav class="navbar navbar-custom navbar-fixed-top" role="navigation">
-		<div class="container">
+		<div id="navigation" class="container">
 			<div class="navbar-header">
 				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-main-collapse">
 					<i class="fa fa-bars"></i>
@@ -49,29 +47,17 @@
 
 			<div class="collapse navbar-collapse navbar-right navbar-main-collapse">
 				<ul class="nav navbar-nav">
-					<!-- Hidden li included to remove active class from about link when scrolled up past about section -->
 					<li class="hidden">
 						<a href="#page-top"></a>
 					</li>
-					<br>
 					<li class="tasks">
 						<a href="#buy_read">Buy/Read</a>
 					</li>
-					<br>
 					<li class= "fav-char">
 						<a href="#fav_char">Favorites</a>
 					</li>
-					<br>
-					<li class ="activity">
-						<a href="#activity">Activity</a>
-					</li>
-					<br>
 					<li class ="badges">
 						<a href="#badges">Badges</a>
-					</li>
-					<br>
-					<li class ="groups">
-						<a href="#groups">Groups</a>
 					</li>
 				</ul>
 			</div>
@@ -97,20 +83,13 @@
 			</div>
 		</div>
 	</header>
-	<br>
-	<br>
-	<br>
-	<br>
-	<br>
-
-
 	<!-- Favorite Character Section -->
 	<section id="fav_char" class="container content-section text-center">
 		<div class="row">
 			<div class="col-lg-8 col-lg-offset-2">
 				<h2>Favorite Characters</h2>
 				<article id="fav-characters">
-					<input type= "text" class="fav_characters_input">
+					<input type= "text" name="fav_characters" id="fav_input">
 					<br>
 					<br>
 					<button type= "button" class="btn btn-default add-character">Add to my list</button>
@@ -130,92 +109,104 @@
 	<section id="buy_read" class="content-section to-buy-section text-center">
 		<div class="buy_read">
 			<div class="container-fluid">
-				<div class="col-lg-10 col-lg-offset-2">
-					<article id="tasks">
-						<div class = "row">
-							<h2 class= "col-md-3 text-left">To Buy</h2>
-							<h2 class= "col-md-3 text-left col-md-offset-2">Bought</h2>
-						</div>
-						<div class = "row">
-							<input type= "text" class="to_buy_input col-md-2">
-							<input type= "text" class="bought_input
-							col-md-2 col-md-offset-3">
-						</div>
-						<br>
-						<br>
-						<div class = "row">
-							<button type="button" class="btn btn-default col-md-2" id="to_buy_add">To Buy List</button>
-							<button type="button" class = "btn btn-default col-md-2 col-md-offset-3" id="bought_add">Bought List</button>
-						</div>
+				<article id="tasks">
+					<div class = "row">
+						<h2 class= "col-md-2 col-md-offset-1">To Buy</h2>
+						<h2 class= "col-md-2 col-md-offset-5">Bought</h2>
 					</div>
 					<div class = "row">
-						<br>
-						<ul class ="col-md-3 col-md-offset-2 to-buy">
-						</ul>
-						<br>
-						<ul class="col-md-3 col-md-offset-1 bought">
-						</ul>
+						<input type= "text" class="to_buy_input col-md-3 col-md-offset-1">
+						<input type= "text" class="bought_input col-md-3 col-md-offset-4">
 					</div>
 					<br>
 					<br>
-					<br>
-					<br>
-					<br>
+					<div class = "row">
+						<button type="button" class="btn btn-default col-md-1 col-md-offset-1" id="to_buy_add">To Buy List</button>
+						<button type="button" class = "btn btn-default col-md-1 col-md-offset-6" id="bought_add">Bought List</button>
+					</div>
+				</div>
+				<div class = "row ul">
+					<ul class ="col-md-3 col-md-offset-1 to-buy">
+					
+					</ul>
+					<ul class="col-md-3 col-md-offset-4 bought">
+					</ul>
+				</div>
+				<br>
+				<br>
+				<br>
+				<br>
+				<br>
 
-					<h2>To Read</h2>
-					<input type= "text" class="to_read_input">
-					<br>
-					<br>
-					<button type="button" class="btn btn-default" id="to_read_add">To Read List</button>
-					<ul class="to-read">
+
+
+				<div class = "row">
+					<h2 class= "col-md-2 col-md-offset-1">To Read</h2>
+					<h2 class= "col-md-2 col-md-offset-5">Read</h2>
+				</div>
+				<div class = "row">
+					<input type= "text" class="to_read_input col-md-3 col-md-offset-1">
+					<input type= "text" class="read_input col-md-3 col-md-offset-4">
+				</div>
+				<br>
+				<br>
+				<div class = "row">
+					<button type="button" class="btn btn-default col-md-1 col-md-offset-1" id="to_read_add">To Read List</button>
+					<button type="button" class = "btn btn-default col-md-1 col-md-offset-6" id="read_add">Read List</button>
+				</div>
+				<div class = "row ul">
+					<ul class ="col-md-3 col-md-offset-1 to-read">
+						
 					</ul>
-					<br>
-					<h2>Read</h2>
-					<input type= "text" class="read_input">
-					<br>
-					<br>
-					<button type="button" class = "btn btn-default" id="read_add">Read List</button>
-					<ul class="read">
+					<ul class="col-md-3 col-md-offset-4 read">
 					</ul>
-				</article>
-			</div>
+				</div>
+
+			</article>
 		</div>
 	</div>
+</div>
 </section>
 
 <!-- Badges Section -->
-<section id="contact" class="container badges-section text-center">
-	<div class="row">
+<section id="badges" class="container badges-section text-center">
+	<div class="row all-badges">
 		<div class="col-lg-8 col-lg-offset-2">
 			<h2>Badges</h2>
-			<p></p>
-
+			<ul class="badge-section">
+				<img src="http://i62.tinypic.com/2ptt3lh.png" id="badge_1" class= "earned_badges gray">
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				<img src="http://i59.tinypic.com/rm2qeg.png" id="badge_2" class= "earned_badges gray">
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				<img src="http://i62.tinypic.com/33lo9ar.png" id="badge_3" class= "earned_badges gray">
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				<br>
+				<br>
+				<img src="http://i57.tinypic.com/294731k.png" id="badge_4"class= "earned_badges gray">
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				<img src="http://i60.tinypic.com/99jmth.png" id="badge_5" class= "earned_badges gray">
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				<img src="http://i58.tinypic.com/2qkotv8.png" id="badge_6" class= "earned_badges gray">
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				<br>
+				<br>
+				<br>
+				<br>
+			</div>
 		</div>
-	</div>
-</section>
-
-<!-- Map Section -->
-<div id="map"></div>
-
-<!-- Footer -->
-<footer>
-	<div class="container text-center">
-		<p>Copyright &copy; Your Website 2014</p>
-	</div>
-</footer>
-
-<script src="./javascripts/script.js"></script>
-
-<!-- Bootstrap Core JavaScript -->
+	</section>
 
 
-<!-- Plugin JavaScript -->
+	<!-- Footer -->
+	<footer>
+	</footer>
+
+	<script src="./javascripts/script.js"></script>
+	<script src="./javascripts/badges.js"></script>
+
+	<!-- Google Maps API Key - Use your own API key to enable the map feature. More information on the Google Maps API can be found at https://developers.google.com/maps/ -->
+	<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCRngKslUGJTlibkQ3FkfTxj3Xss1UlZDA&sensor=false"></script>
 
 
-<!-- Google Maps API Key - Use your own API key to enable the map feature. More information on the Google Maps API can be found at https://developers.google.com/maps/ -->
-<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCRngKslUGJTlibkQ3FkfTxj3Xss1UlZDA&sensor=false"></script>
-
-<!-- Custom Theme JavaScript -->
-
-<body>
-	</html>
+	<body>
+		</html>

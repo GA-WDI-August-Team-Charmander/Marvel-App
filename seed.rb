@@ -79,20 +79,20 @@ end
 
 get_character_comics("Spider-Man")
 
-Badge.create({name: "Avid Reader - 1"});
-Badge.create({name: "Avid Reader - 5"});
-Badge.create({name: "Avid Reader - 10"});
+Badge.create({name: "Avid Reader - 1", badge_src: "./img/badge_avidreader.png"});
+Badge.create({name: "Avid Reader - 5", badge_src: "./img/badge_avidreader2.png"});
+Badge.create({name: "Avid Reader - 10", badge_src: "./img/badge_avidreader3.png"});
 Badge.create({name: "Avid Reader - 20"});
 Badge.create({name: "Avid Reader - 50"});
 Badge.create({name: "Avid Reader - 100"});
 
 # when they read 5 or more from one age:
-Badge.create({name: "Badge of the Ages - Golden Age of Comics: 1938-1950"});
-Badge.create({name: "Badge of the Ages - Silver Age of Comics: 1951-1970"});
+Badge.create({name: "Badge of the Ages - Golden Age of Comics: 1938-1950", badge_src: "./img/badge_age_gold.png"});
+Badge.create({name: "Badge of the Ages - Silver Age of Comics: 1951-1970", badge_src: "./img/badge_age_silver.png"});
 Badge.create({name: "Badge of the Ages - Bronze Age of Comics: 1971-1985"});
 Badge.create({name: "Badge of the Ages - Modern Age of Comics: 1986-Now"});
 
-Badge.create({name: "Character Fan"});
+Badge.create({name: "Character Fan", badge_src: "./img/badge_characterfan.png"});
 
 
 

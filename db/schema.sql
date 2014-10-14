@@ -28,7 +28,8 @@ thumbnail text
 
 CREATE TABLE badges (
 id serial primary key,
-name varchar(255)
+name varchar(255),
+badge_src text 
 );
 
 CREATE TABLE fav_characters (
@@ -54,5 +55,5 @@ bought boolean
 CREATE TABLE users_badges (
 id serial primary key,
 user_id integer,
-badge_id integer 
+badge_id integer
 );

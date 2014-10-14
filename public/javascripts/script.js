@@ -116,6 +116,9 @@ var ComicListView = Backbone.View.extend({
 		   var comic = new ComicView({ model: item })
 		   comic.render();
 		   this.$el.append(comic.el)
+		   console.log(userBadgeCollection)
+		   
+		   console.log('hey there')
 		}
 	}
 });
@@ -143,6 +146,7 @@ $('#bought_add').on('click', function(){
 $('#to_read_add').on('click', function(){
 	var searchedComic = $(".to_read_input").val();
 	var searchResult = comicCollection.where({title: searchedComic});
+
 	if (searchResult.length != 0) {
 
 		userComicCollection.create({user_id: 1, comic_id: searchResult[0].id, read: false});
@@ -156,13 +160,51 @@ $('#read_add').on('click', function(){
 	if (searchResult.length != 0) {
 
 		userComicCollection.create({user_id: 1, comic_id: searchResult[0].id, read: true});
+
+		var userHasRead = userComicCollection.where({user_id: 1, read: true});
+		var readQty = userHasRead.length;
+		console.log(readQty)
+
+
+		if(readQty == 1){
+			var badge = badge_collection.where({name: "Avid Reader - 1"})[0]
+			$('#badge_3').removeClass('gray');
+			usersBadge_collection.create({user_id: 1, badge_id: badge.id});
+
+		} else if (readQty == 5){
+			var badge = badge_collection.where({name: "Avid Reader - 5"})[0]
+			$('#badge_5').removeClass('gray');
+			usersBadge_collection.create({user_id: 1, badge_id: badge.id});
+			
+		} else if (readQty == 10){
+			var badge = badge_collection.where({name: "Avid Reader - 10"})[0]
+			$('#badge_4').removeClass('gray');
+			usersBadge_collection.create({user_id: 1, badge_id: badge.id});
+			
+		// } else if (readQty == 20){
+		// 	$('#avid_reader_20').removeClass('.grey');
+		// 	//Badge.create( {name: 'avid_reader_20'} );
+		// } else if (readQty == 50){
+		// 	$('#avid_reader_50').removeClass('.grey');
+		// 	//Badge.create( {name: 'avid_reader_50'} );
+		// } else if (readQty == 100){
+		// 	$('#avid_reader_100').removeClass('.grey');
+		// 	//Badge.create( {name: 'avid_reader_100'} );
+		// }
+		// 	// console.log(usersBadge_collection.models)
+		// 	// if (userBadgeCollection.models.length == 1){
+
+		// 	// 	userBadgeCollection.create({user_id: this.userId, badge_id: });
+		// 	// }
+
+		}
 	}
 });
 
 
-var toBuyComics = new ComicListView({ collection: userComicCollection, el: $('.to_buy'), userId: 1, list: 'buy', status: false });
+var toBuyComics = new ComicListView({ collection: userComicCollection, el: $('.to-buy'), userId: 1, list: 'buy', status: false });
 var boughtComics = new ComicListView({ collection: userComicCollection, el: $('.bought'), userId: 1, list: 'buy', status: true });
-var toReadComics = new ComicListView({ collection: userComicCollection, el: $('.to_read'), userId: 1, list: 'read', status: false });
+var toReadComics = new ComicListView({ collection: userComicCollection, el: $('.to-read'), userId: 1, list: 'read', status: false });
 var readComics = new ComicListView({ collection: userComicCollection, el: $('.read'), userId: 1, list: 'read', status: true });
 // 
 // 
@@ -245,8 +287,7 @@ var BadgeView = Backbone.View.extend({
 
 		badge_collection.fetch().done(function() {
 			var badge = badge_collection.where({id: badgeId})[0].attributes;
-
-			thisView.$el.html('<img src="#"class="badge-image"><h4>' + badge.name + '</h4>');
+			// thisView.$el.html('<img src="' + badge.image_src + '"><h4>' + badge.name + '</h4>');
 		});
 	}
 });
@@ -261,49 +302,22 @@ var BadgeListView = Backbone.View.extend({
 		this.collection.fetch();
 	},
 	addOne: function(item){
+
 		var badgeView = new BadgeView({ model: item});
 		badgeView.render();
-		this.$el.append(badgeView.el);
+		// this.$el.append(badgeView.el);
 	}
 });
 
 var usersBadges = new BadgeListView({ collection: usersBadge_collection, el: $('#badges'), userId: 1});
 
-
-
-
-var Item_View = Backbone.View.extend({
-	tagName: "li",
-
-	initialize: function(){
-		this.listenTo(this.model, "remove", this.remove);
-	},
-	render: function(){
-		this.$el.html("<p>" + this.model.get('name') + "</p>");
-	}
-
-});
-
-var List_View = Backbone.View.extend({
-	tagName: "ul",
-
-	initialize: function(){
-		this.listenTo(this.collection, 'add', this.addOne);
-		this.listenTo(this.collection, 'change', this.render); // is this right?
-		// when colleciton changes, reRender list_view ?
-		this.collection.fetch();
-	},
-
-	addOne: function(item_view){
-		var item_view = new Item_view({model: item_view});
-		item_view.render();
-		this.$el.append(item_view);
-	},
-	render: function(){
-		this.collection.forEach(this.addOne, this);
-	}
-});
-
+// var this_user_id = 1;
+// var this_user_comicCollection = userComicCollection.where({user_id: this_user_id});
+// var userHasRead = [];
+// _.each(this_user_comicCollection, function(item){
+// 	if(item.attributes.read == true){
+// 		userHasRead.push(item)
+// 	}
 
 //~<*{{ FavCharacters Views}}*>~ --------------------------------
 // 
@@ -345,7 +359,6 @@ var CharacterView = Backbone.View.extend({
 
 		character_collection.fetch().done(function() {
 			var character = character_collection.where({id: characterId})[0].attributes;
-			console.log(thisView.$el)
 			thisView.$el.html('<img src="' + character.image_url + '"class="fav-char-image">')//<li class="character-info"><h4>' + character.name + '</h4></br>' + character.description + '</li>')
 			// thisView.$el.html(thisView.favCharTemplate({ character: character }));
 		})
@@ -371,7 +384,7 @@ var FavCharacterListView = Backbone.View.extend({
 });
 
 $('.add-character').on('click', function() {
-	var searchedName = $(".fav_characters_input").val();
+	var searchedName = $("#fav_input").val();
 	var searchResult = character_collection.where({name: searchedName});
 	console.log(character_collection)
 	console.log(searchedName)
@@ -429,6 +442,51 @@ function autoComplete(searchBar) {
 _.each($('.add_comic'), function(input) {
 	console.log(input)
 	autoComplete(input);
+})
+
+
+// function badgeSetUp(){
+// 	//get usersBadges
+// 	var this_user_id = 1;
+// 	var this_user_badges = usersBadge_collection.where({user_id: this_user_id});
+
+// 	var badges_to_ungrey_ids = []
+// 	_.each(this_user_badges, function(badge){
+// 		var this_badge_id = "#badge_" + badge.attributes('badge_id');
+// 		badges_to_ungrey_ids.push(this_badge_id);
+// 	});
+
+// 	_.each(badges_to_ungrey_ids, function(badge_id){
+// 		$(badge_id).removeClass('gray');
+// 	});
+
+// }
+
+// badgeSetUp()
+
+
+
+var userBadges = usersBadge_collection.where({user_id: 1})
+
+var badges_to_ungrey_ids = []
+var badgeArray = []
+
+_.each(userBadges, function(userBadge) {
+	badges_to_ungrey_ids.push(userBadge.attributes.badge_id)
+});
+
+_.each(badges_to_ungrey_ids, function(id) {
+	var badges = badge_collection.where({id: id})
+	
+	_.each(badges, function(badge) {
+		badgeArray.push(badge);
+	});
+});
+
+_.each(badgeArray, function(badge) {
+	if(badge.name == "Avid Reader - 1") {
+		$('#badge_3').removeClass('gray')
+	}
 })
 
 

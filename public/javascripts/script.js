@@ -445,53 +445,55 @@ _.each($('.add_comic'), function(input) {
 })
 
 
-// function badgeSetUp(){
-// 	//get usersBadges
-// 	var this_user_id = 1;
-// 	var this_user_badges = usersBadge_collection.where({user_id: this_user_id});
-
-// 	var badges_to_ungrey_ids = []
-// 	_.each(this_user_badges, function(badge){
-// 		var this_badge_id = "#badge_" + badge.attributes('badge_id');
-// 		badges_to_ungrey_ids.push(this_badge_id);
-// 	});
-
-// 	_.each(badges_to_ungrey_ids, function(badge_id){
-// 		$(badge_id).removeClass('gray');
-// 	});
-
-// }
-
-// badgeSetUp()
 
 
+// var userBadges = usersBadge_collection.where({user_id: 1})
 
-var userBadges = usersBadge_collection.where({user_id: 1})
+// var badges_to_ungrey_ids = []
+// var badgeArray = []
 
-var badges_to_ungrey_ids = []
-var badgeArray = []
+// _.each(userBadges, function(userBadge) {
+// 	badges_to_ungrey_ids.push(userBadge.attributes.badge_id)
+// });
 
-_.each(userBadges, function(userBadge) {
-	badges_to_ungrey_ids.push(userBadge.attributes.badge_id)
-});
-
-_.each(badges_to_ungrey_ids, function(id) {
-	var badges = badge_collection.where({id: id})
+// _.each(badges_to_ungrey_ids, function(id) {
+// 	var badges = badge_collection.where({id: id})
 	
-	_.each(badges, function(badge) {
-		badgeArray.push(badge);
+// 	_.each(badges, function(badge) {
+// 		badgeArray.push(badge);
+// 	});
+// });
+
+// _.each(badgeArray, function(badge) {
+// 	if(badge.name == "Avid Reader - 1") {
+// 		$('#badge_3').removeClass('gray')
+// 	}
+// })
+
+function badgeSetUp(){
+	//get usersBadges
+	var this_user_id = 1;
+
+	//all the user badges belonging to user 1
+	var this_user_badges = usersBadge_collection.where({user_id: this_user_id});
+
+
+	_.each(this_user_badges, function(userbadge){
+
+		_.each(badge_collection, function(badge){
+			if(badge.id == userbadge.badge_id){
+				if(badge.name == "Avid Reader - 1" ){
+					$('#badge_3').removeClass('gray');
+				} else if (badge.name == " avid reader 1 "){
+
+				}
+			}
+		});
+
 	});
-});
+}
 
-_.each(badgeArray, function(badge) {
-	if(badge.name == "Avid Reader - 1") {
-		$('#badge_3').removeClass('gray')
-	}
-})
-
-
-
-
+badgeSetUp()
 
 
 
